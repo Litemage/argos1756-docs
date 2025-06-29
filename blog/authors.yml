@@ -1,0 +1,19 @@
+# The following entry is an example of all the settings you can have for authors
+# yangshun:
+#   name: Yangshun Tay
+#   title: Ex-Meta Staff Engineer, Co-founder GreatFrontEnd
+#   url: https://linkedin.com/in/yangshun
+#   image_url: https://github.com/yangshun.png
+#   page: true
+#   socials:
+#     x: yangshunz
+#     linkedin: yangshun
+#     github: yangshun
+#     newsletter: https://www.greatfrontend.com
+
+mentor:
+  name: Argos Admin
+  title: Admin
+  page: true
+  image_url: /img/favicon.png
+
