@@ -62,7 +62,7 @@ std::cout << "Hello, World!\n";
 ```
 <details>
 <summary> your code should now look like this  📊</summary>
-    ```
+    ```cpp
     // Copyright (c) FIRST and other WPILib contributors.
     // Open Source Software; you can modify and/or share it under the terms of
     // the WPILib BSD license file in the root directory of this project.
@@ -98,5 +98,5 @@ std::cout << "Hello, World!\n";
 ## Running your code
 Now that you've written and saved your code, the next step is to run it and see your message appear!
 
-For detailed instructions, please follow the guide on [how to simulate your robot code](../../WPILib_VS CodeDocs/Simulate Robot Code/simulate_robot_code.md).
+For detailed instructions, please follow the guide on [how to simulate your robot code](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>)
 

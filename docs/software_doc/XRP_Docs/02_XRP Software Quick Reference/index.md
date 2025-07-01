@@ -1,12 +1,15 @@
 ---
 sidebar_position: 2
 ---
+# XRP software quick reference
 
 ## XRP WPILib Overview 
- WPILib is like a special toolbox for C++ programmers in FIRST Robotics. It gives you ready-made tools to control your robot's motors, read sensors, and talk to the drivers. It makes programming your robot much easier, so you can focus on making it do cool things instead of worrying about tiny details.
+ WPILib is like a special toolbox for C++ programmers in FIRST Robotics. It gives you ready-made tools to control your robot's motors, read sensors, and talk to the drivers. It makes programming your robot much easier, so you can focus on making it do cool things instead of worrying about tiny details.  
 
- for official documentation go to [WPILib 2025](https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_x_r_p_gyro.html)
-_____________________________________________________________________________________________________________________________________________________
+ for official documentation go to [WPILib 2025](https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_x_r_p_gyro.html)  
+
+---
+
 ## XRP Motor
 
  The XRP robot has two motors: a left and a right drive motor. The motor speed range is from -1.0 to 1.0.
@@ -24,7 +27,7 @@ ________________________________________________________________________________
  ```cpp
  #include <frc/xrp/XRPMotor.h>
  ```
-_____________________________________________________________________________________________________________________________________________________
+
  **Constructor**
 
  You create an `XRPMotor` object by specifying its device ID (0 for the left motor, 1 for the right motor).
@@ -53,7 +56,7 @@ ________________________________________________________________________________
  m_left_motor.Set(0.5);
  m_right_motor.Set(0.5);
  ```
-_____________________________________________________________________________________________________________________________________________________
+---
 
 ## XRP Gyro 
 
@@ -96,7 +99,7 @@ ________________________________________________________________________________
  // Print the angle to the console. .value() is used to get the raw number.
  std::cout << "Gyro Angle: " << current_angle.value() << " deg" << std::endl;
  ```
-_____________________________________________________________________________________________________________________________________________________
+---
 
 ## XRP Servo
 
@@ -143,7 +146,7 @@ ________________________________________________________________________________
  // Print the angle to the console
  std::cout << "Servo Angle: " << current_angle.value() << " deg" << std::endl;
  ```
-
+---
 ## XRP Line Sensor
 
  The XRP has an onboard reflectance sensor array for line following. This is managed by the `frc::XRPReflectanceSensor` class, which provides readings from the left and right sensors.

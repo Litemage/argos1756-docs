@@ -1,7 +1,7 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
-
+# Creating Subsystem
 The first step is to create a subsystem for our drivetrain. A subsystem is a class that represents a mechanism on the robot. It should contain all the code for that mechanism, such as motors and sensors.
 
 To create a new subsystem in VS Code with the WPILib extension:  

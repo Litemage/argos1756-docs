@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 
-# How to Simulate Robot Code
+# Simulate Robot Code
 
 Simulation is a powerful tool that allows you to run and test your robot code on your computer without needing to connect to a physical robot. This is extremely useful for catching errors early, testing logic, and programming when you don't have access to the hardware.
 

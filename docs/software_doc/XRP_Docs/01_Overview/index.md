@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 ---
+# XRP Overview
 
 ## What is the XRP Robot?
 The XRP is a compact robot designed to teach the fundamentals of writing software and using sensors to accomplish tasks. A key feature of the XRP is its support for multiple programming languages, providing a versatile learning path.

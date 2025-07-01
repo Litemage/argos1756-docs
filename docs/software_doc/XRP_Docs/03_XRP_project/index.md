@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 ---
-
+# XRP Create a Project
 
 # Creating a C++ XRP Project
 This tutorial details how to create a blank C++ XRP project using the command-based framework. For a more in-depth overview, please refer to the [WPILib documentation](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html).
