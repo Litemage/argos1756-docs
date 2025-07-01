@@ -98,9 +98,15 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'docsSidebar',
+            sidebarId: 'softwareSidebar',
             position: 'left',
-            label: 'Documentation',
+            label: 'Software',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'MechanicalSidebar',
+            position: 'left',
+            label: 'Mechanical',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {

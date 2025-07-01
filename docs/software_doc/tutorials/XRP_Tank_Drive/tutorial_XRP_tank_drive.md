@@ -1,4 +1,8 @@
-# XRP Tank Drive Tutorial (C++ Command-Based)
+---
+sidebar_position: 3
+---
+
+## XRP Tank Drive Tutorial (C++ Command-Based)
 
 Tank drive is a direct-drive control where one joystick is used for each side of the drive train. The left joystick moves the left motor forward and backward, and the right joystick moves the right motor forward and backward. To turn, you move one joystick forward and the other in reverse. This control scheme offers the driver complete control, but tends to have a steeper learning curve.
 
@@ -7,6 +11,7 @@ But, this scheme is the easiest to implement in software because of its simplici
 If you have some experience programming, try implementing this drive control now. Otherwise, read on for step-by-step instructions.
 
 ![alt text](JoyStick_Image.png)
+
 
 ## The Pre-Code Workout 📊
 
@@ -46,49 +51,31 @@ While simple, it's important to keep the tasks at hand straight. I will walk you
 
 ## Time to Start Coding
 
-If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](/docs/XRP%20Tutorials/XRP%20Project/) If you have, it's time to start coding!
+If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../XRP_project/tutorial_XRP_Project.md) If you have, it's time to start coding!
 
 ### Create a Drivetrain Subsystem
 
-The first step is to create a subsystem for our drivetrain. A subsystem is a class that represents a mechanism on the robot. It should contain all the code for that mechanism, such as motors and sensors.
-
-To create a new subsystem in VS Code with the WPILib extension:  
-1. Right-click on the `src/main/include/subsystems` folder in the file explorer.  
-
-2. Select `WPILib: Create a new class/command`.  
-  ![Create Subsystem](create_subsystem_right_click.png)  
-
-3. Choose `Subsystem` from the list.  
-  ![alt text](Subystem_Selection.png)  
-
-4. Name the new subsystem `Drivetrain`.  
-  ![alt text](Drivetrain_Subsystem.png)  
-
-5. You should see two folder now in one in `src/main/include/subsystems` called `Drivetrain.h`  and the other in `src/main/cpp/subsystems` called `Drivetrain.cpp`
-  ![alt text](Subystem_Selection.png)
-
-
-
+The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](../../VS_Code_Docs/Create_Subsystem/creating_subsystem.md) for instructions on how to do this. You should name your subsystem `Drivetrain`.
 
 ###  Drivetrain.h header File
 
-**What is a Header File in C++?**
+**What is a Header File in C++?** <br />
 Imagine you have a big toolbox, and inside it are all the specialized tools (functions and variables) you need to build something.
 
 In C++, a header file (usually ending with .h or .hpp) is like a table of contents for a specific part of your toolbox. It doesn't contain the actual tools themselves (the full function definitions or variable storage), but it tells your program:
 
 What tools are available: It declares functions, classes, and variables that are defined elsewhere (usually in a corresponding .cpp file).
 How to use them: It provides the necessary information (like function names, what kind of data they take, and what kind of data they return) so your program knows how to call and interact with these tools.
-When you use the #include directive (e.g., `#include <iostream>`) at the top of your C++ code, you're essentially telling the compiler, "Hey, go look at this header file. I plan to use the tools it lists, and I need to know how to use them!"
+When you use the #include directive (e.g., #include `<iostream>`) at the top of your C++ code, you're essentially telling the compiler, "Hey, go look at this header file. I plan to use the tools it lists, and I need to know how to use them!"
 
 This helps organize your code, makes it reusable, and allows different parts of your program to know about and use the same functions and data structures without having to redefine them everywhere.
 
-1. We need to tell the software we want to use the XRP robot motors. To do this we will need to include the header that declares the motor objects, see [Controlling a Motor](/docs/XRP%20Tutorials/XRP%20WPILib/#controlling-a-motor) for more details on controlling XRP robot motor.
+1. We need to tell the software we want to use the XRP robot motors. To do this we will need to include the header that declares the motor objects, see [Controlling a Motor](../XRP_WPILib/tutorial_XRP_WPILib.md#controlling-a-motor) for more details on controlling XRP robot motor.
     1. We will need to add the following include to the top of the `Drivetrain.h` file
     ```cpp
     #include <frc/xrp/XRPMotor.h>
     ```
-
+br>
 2. Now we need to tell our code about the two motors on the robot. Think of this like giving a name to each motor so we can command it later. In programming, we call these "objects". We need one for the left motor and one for the right. The robot knows which is which by a channel number. For the XRP, the left motor is channel `0` and the right motor is channel `1`. 
     1. Let's add the code to create these motor objects inside our `Drivetrain` class. We'll put them in the `private` section of `Drivetrain.h`. Making them `private` means only the `Drivetrain` code can talk to the motors directly, which helps keep our project organized.
      ```cpp
@@ -202,8 +189,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
  <details>
  <summary>Your Drivetrain.cpp file should look like this</summary>
-
-```cpp
+``` cpp
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -249,7 +235,7 @@ void Drivetrain::Periodic() {}
      #include <frc2/command/RunCommand.h>
      ```
 
- 2.  Next, we need to create the actual `Drivetrain` and `XboxController` objects inside our `RobotContainer`. Think of this as giving the brain its own set of legs and ears to use. We'll declare these in the `private` section to keep our code organized. For more details on the controller, see the [Xbox Controller section in the WPILib tutorial](/docs/XRP%20Tutorials/XRP%20WPILib/#xbox-controller).
+ 2.  Next, we need to create the actual `Drivetrain` and `XboxController` objects inside our `RobotContainer`. Think of this as giving the brain its own set of legs and ears to use. We'll declare these in the `private` section to keep our code organized. For more details on the controller, see the [Xbox Controller section in the WPILib tutorial](../XRP_WPILib/tutorial_XRP_WPILib.md#xbox-controller).
 
      ```cpp
      private:
@@ -451,4 +437,4 @@ void Drivetrain::Periodic() {}
  </details>
 
 ## Time to test your code
-Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](/docs/XRP%20Tutorials/XRP%20Run%20Code/) to test your code
+Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](../XRP_Run_Code/tutorial_XRP_run_code.md) to test your code
