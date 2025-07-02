@@ -86,7 +86,7 @@ br>
        // This creates an object for the right motor on channel 1
        frc::XRPMotor m_right_motor{1};
      ```
-3. Finally, we need to create a way to tell the drivetrain how to move. We'll do this by creating a 'function'. A function is just a named set of instructions. We'll name our function `TankDrive`. Our `TankDrive` function needs to know how fast each motor should go, so we'll give it two inputs: `leftSpeed` and `rightSpeed`. We need to make this function `public`, which just means that other parts of the robot's code (like the code for the joystick) are allowed to use it. In the header (`.h`) file, we just announce that this function exists. This is called a 'declaration'. We'll write the actual instructions for the function in the source (`.cpp`) file later.
+3. Finally, we need to create a way to tell the drivetrain how to move. We'll do this by creating a [function](../../CPP_Docs/CPP_software_quick_reference/index.md#Functions). A function is just a named set of instructions. We'll name our function `TankDrive`. Our `TankDrive` function needs to know how fast each motor should go, so we'll give it two inputs: `leftSpeed` and `rightSpeed`. We need to make this function `public`, which just means that other parts of the robot's code (like the code for the joystick) are allowed to use it. In the header (`.h`) file, we just announce that this function exists. This is called a 'declaration'. We'll write the actual instructions for the function in the source (`.cpp`) file later.
     a. Add the function declaration to the `public` section of `Drivetrain.h`:
      ```cpp
      public:

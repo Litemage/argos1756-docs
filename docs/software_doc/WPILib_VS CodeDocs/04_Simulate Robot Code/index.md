@@ -46,7 +46,7 @@ When you run the simulation, a window called the **"Robot Simulation"** will app
         * **Teleoperated:** Allows for manual control of the robot.
         * **Test:** Runs your test commands.
     * Most of your testing will be done using Teleoperated mode.
-    > **Note:** When testing XRP code, you must enable the robot and select a robot state (e.g., Teleoperated) for your code to run.
+    > **Note:** When testing XRP code, you must enable the robot using the [FRC Driver Station](<../../FRC_Software_Tools/Driver Station/index.md>) and select a robot state (e.g., Teleoperated) for your code to run.
     *   ![Robot State](Robot_State.png)
     
 2. **Simulator Joystick**

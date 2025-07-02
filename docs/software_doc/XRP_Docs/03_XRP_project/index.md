@@ -1,8 +1,6 @@
 ---
 sidebar_position: 3
 ---
-# XRP Create a Project
-
 # Creating a C++ XRP Project
 This tutorial details how to create a blank C++ XRP project using the command-based framework. For a more in-depth overview, please refer to the [WPILib documentation](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html).
 
@@ -13,7 +11,7 @@ This tutorial details how to create a blank C++ XRP project using the command-ba
     1. WPILib icon is in the upper-right corner.
     2. ![WPILib Icon](Step2_WPILib_icon.png) <br />
 
-3. In the prompt window, type "New Project" and click "WPILib: Create a new project".
+3. In the prompt window, type "Create a new project" and click "WPILib: Create a new project".
     1. ![Create a new project](Step3_New_Project.png)<br />
 
 4. A window like this will appear: 
@@ -32,7 +30,7 @@ This tutorial details how to create a blank C++ XRP project using the command-ba
 
 10.  **⚠️ Important: Enable Desktop Support**
      1. You must click the checkbox to **Enable Desktop Support**. This is critical for running the simulator.
-    2. ![Enable Desktop Support](Step10_Enabled_Desktop_Support.png)<br />
+     2. ![Enable Desktop Support](Step10_Enabled_Desktop_Support.png)<br />
 
 11. Click "Generate Project".
     1. ![Generate Project](Generaete_Project.png)<br />
@@ -41,7 +39,7 @@ This tutorial details how to create a blank C++ XRP project using the command-ba
     1. This will open the project you just created.
     2. ![Yes (Current Window)](Yes_Current_Window.png)<br />
 
-13. It should open a file structure that looks like this.
+13. It should open a folder structure that looks like this.
     1. ![Base project file structure](Base_Project_File_Stuck.png)<br />
 
 > **Note:** If you do not see the folder structure, click on the folder icon on the left-hand side to open the file explorer. ![Folder Icon](Folder_icon.png)
