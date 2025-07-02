@@ -24,14 +24,14 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Argos 1756 Documentaiton">
       <HomepageHeader />
       <main>
         <h1 className={styles.header}>
           Welcome to First Robotics Compeition (FRC) Team 1756 ARGOS' documentation!
         </h1>
         <p className={styles.paragraph}>
-          Get started with our <a href='docs/XRP Tutorials/XRP WPILib/'>XRP tutorials</a>, or <a href="docs/about/">Read about these docs</a>.
+          Get started with our <a href='docs/software_doc/XRP_Docs/Overview/'>XRP tutorials</a>, or <a href="docs/about/">Read about these docs</a>.
         </p>
       </main>
     </Layout>
