@@ -35,9 +35,13 @@ To move and interact with its environment, the XRP comes equipped with several c
 ![XRP Sensor Overview](XRP_Sensor_Overview.png)
 
 ## Assembling your XRP robot
-Click the image below link for instruction on assembling your XRP robot
+Click the video link below for instructions on assembling your XRP robot
 
 [![XRP Introduction Video](https://img.youtube.com/vi/JQyKhzlMSms/hqdefault.jpg)](https://www.youtube.com/watch?v=JQyKhzlMSms&list=PLV6srU7KoAx4enIaCHo3Aiddv8gy4Sghd&index=1)
+
+## XRP WPIlib setup
+For instructions on how to setup the XRP robot for WPILib software, see [WPILib Imaging](https://docs.wpilib.org/en/stable/docs/xrp-robot/hardware-and-imaging.html) or the video below
+[![XRP 01: Introduction and Software Setup](https://img.youtube.com/vi/Nlk52QdoasE/hqdefault.jpg)](https://www.youtube.com/watch?v=Nlk52QdoasE&list=PLV6srU7KoAx4enIaCHo3Aiddv8gy4Sghd&index=5)
 
 ## XRP Tutorial overview
 

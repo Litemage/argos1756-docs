@@ -3,7 +3,7 @@ sidebar_position: 3
 ---
 # XRP tank drive  
 
-## XRP Tank Drive Tutorial (C++ Command-Based)
+## Overview
 
 Tank drive is a direct-drive control where one joystick is used for each side of the drive train. The left joystick moves the left motor forward and backward, and the right joystick moves the right motor forward and backward. To turn, you move one joystick forward and the other in reverse. This control scheme offers the driver complete control, but tends to have a steeper learning curve.
 
@@ -27,8 +27,11 @@ Let's start with listing out the tasks we need to perform:
 * Read left joystick from controller
 * Read right joystick from controller
 
-Now that we have that, let's make a chart of what our code needs to do.
-Programmers use flow charts a lot to visualize a plan for implementing code.  Try to write your flowchart before looking at the provided one.
+### Flow Chart
+ > [flow chart](../../CPP_Docs/CPP_software_quick_reference/index.md#flow-charts) is a diagram that shows the steps in a process. Each step is represented by a different symbol and contains a short description of the process step. The flow chart symbols are linked together with arrows showing the process flow direction. It's a great way to plan your code before you start writing.
+
+Now that we understand the overall idea of the code, let's create a flowchart to outline what our code needs to do.
+Programmers use flow charts a lot to visualize a plan for implementing code. Attempt to create your own flowchart before reviewing the provided example.
 
 <details>
 <summary> Flow Chart 📊</summary>
@@ -48,14 +51,31 @@ Programmers use flow charts a lot to visualize a plan for implementing code.  Tr
 
 </details>
 
+### Inputs and Outputs
+Now that we understand how the code will work, we need to define the input and output of our function.   
+  ***Inputs:***  These are things we would like our function to know about.   
+  ***Outputs:*** These are what we would like our function to tell everyone else about.   
+
+<details>
+<summary>Define Inputs and Outputs. Try defining the Inputs and Outputs before looking.</summary>
+
+**Inputs:** 
+- `leftSpeed`: The speed value from the left joystick.
+- `rightSpeed`: The speed value from the right joystick.
+
+**Outputs:**
+- `Left motor power` 
+- `Right motor power`
+</details> 
+
 While simple, it's important to keep the tasks at hand straight. I will walk you through how to do each of these things in code in the next section.
 
 ## Time to Start Coding
 
+### Creating a project
 If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../XRP_project/tutorial_XRP_Project.md) If you have, it's time to start coding!
 
 ### Create a Drivetrain Subsystem
-
 The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](../../VS_Code_Docs/Create_Subsystem/creating_subsystem.md) for instructions on how to do this. You should name your subsystem `Drivetrain`.
 
 ###  Drivetrain.h header File
@@ -76,11 +96,10 @@ This helps organize your code, makes it reusable, and allows different parts of 
     ```cpp
     #include <frc/xrp/XRPMotor.h>
     ```
-br>
+
 2. Now we need to tell our code about the two motors on the robot. Think of this like giving a name to each motor so we can command it later. In programming, we call these "objects". We need one for the left motor and one for the right. The robot knows which is which by a channel number. For the XRP, the left motor is channel `0` and the right motor is channel `1`. 
     1. Let's add the code to create these motor objects inside our `Drivetrain` class. We'll put them in the `private` section of `Drivetrain.h`. Making them `private` means only the `Drivetrain` code can talk to the motors directly, which helps keep our project organized.
      ```cpp
-     private:
        // This creates an object for the left motor on channel 0
        frc::XRPMotor m_left_motor{0};
        // This creates an object for the right motor on channel 1
@@ -96,6 +115,7 @@ br>
      ```
 <details>
 <summary>Your Drivetrain.h file should look like this</summary>
+
 ``` cpp
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -190,6 +210,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
  <details>
  <summary>Your Drivetrain.cpp file should look like this</summary>
+ 
 ``` cpp
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
@@ -439,3 +460,5 @@ void Drivetrain::Periodic() {}
 
 ## Time to test your code
 Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](../XRP_Run_Code/tutorial_XRP_run_code.md) to test your code
+
+If everything is working correctly, you can now drive your XRP robot using the left and right joysticks.

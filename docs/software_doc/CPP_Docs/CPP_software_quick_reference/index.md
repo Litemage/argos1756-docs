@@ -26,32 +26,64 @@ std::string name = "John";
 
 ---
 
+## Flow Charts
+
+Flow charts are visual representations of the flow of a program. They use symbols to represent different types of actions or steps in a process.
+
+**Example:**
+Consider a program that checks if a person is old enough to vote (age 18 or older).
+
+```mermaid
+graph TD
+    Start[Start] --> CheckAge{Is age >= 18?}
+    CheckAge -->|Yes| Vote[You can vote]
+    CheckAge -->|No| NoVote[You cannot vote]
+    Vote --> End[End]
+    NoVote --> End[End]
+```
+
+---
+
 ## Control Structures
 
 Control structures allow you to control the flow of your program.
 
 ### If-Else Statements
+Think of an `if-else` statement as a way for your program to make decisions. It's like asking a series of questions. The computer checks each question in order and runs the code for the *first one* that is true.
 
-The `if-else` statement is used to execute a block of code based on a condition. If the condition evaluates to `true`, the code inside the `if` block runs. Otherwise, the code inside the `else` block runs.
+-   **`if`**: Asks the first question.
+-   **`else if`**: If the first answer was "no," ask a second question.
+-   **`else`**: If all the answers were "no," do this as a default.
+
+This structure is perfect for choosing one action from several options.
 
 **Syntax:**
 ```cpp
-if (condition) {
-    // Code to execute if condition is true
+if (condition1) {
+    // Code to execute if condition1 is true
+} else if (condition2) {
+    // Code to execute if condition2 is true
 } else {
-    // Code to execute if condition is false
+    // Code to execute if none of the conditions are true
 }
 ```
 
 **Example:**
 ```cpp
-int age = 18;
-if (age >= 18) {
-    std::cout << "You are an adult.\n"; // Runs if age is 18 or more
+int age = 20;
+if (age < 13) {
+    std::cout << "You are a child.\n";
+} else if (age < 18) {
+    std::cout << "You are a teenager.\n";
 } else {
-    std::cout << "You are a minor.\n"; // Runs if age is less than 18
+    std::cout << "You are an adult.\n";
 }
 ```
+
+In this example:
+- If `age` is less than 13, the program prints "You are a child."
+- If `age` is between 13 and 17, the program prints "You are a teenager."
+- Otherwise, the program prints "You are an adult."
 
 ---
 
@@ -291,14 +323,19 @@ In this part, we define constants inside a namespace.
 // RobotConfig.h
 #pragma once
 
-namespace RobotConfig {
-    const double max_robot_speed = 3.0; // Maximum speed in meters per second
-    const double max_turning_speed = 1.5; // Maximum turning speed in radians per second
+```cpp
+namespace DrivetrainConstants {
+
+    constexpr static double kMoveSpeed  = 0.75; // Speed for moving forward and backward (1 = max speed, 0 = stopped)
+    constexpr static double kTurnSpeed  = 0.5; // Speed for turning left and right (1 = max speed, 0 = stopped)
 }
 ```
+-   `namespace DrivetrainConstants`: This creates a container or a "scope" named `DrivetrainConstants`. It's used to group related variables together to keep the code organized and to avoid naming conflicts.
+-   `constexpr`: This keyword declares the variable as a "constant expression." It means its value is fixed and must be known when the code is compiled. 
+-   `static`: This keyword limits the variable's visibility to just this file. It helps prevent conflicts if another file were to accidentally declare a variable with the same name.
+-   `double`: This is the data type, which means the variable can hold a number with a decimal point. This is suitable for representing speeds that aren't whole numbers.
+-   `kMoveSpeed`: This is the name of the variable. The `k` prefix is a common programming convention (especially in FRC) to indicate that the variable is a constant.
 
-Here:
-- `max_robot_speed` and `max_turning_speed` are constants stored in the `RobotConfig` namespace.
 
 **Part 2: Reading and Using Values**
 
@@ -310,11 +347,12 @@ In this part, we access the values from the namespace and use them in calculatio
 
 int main() {
     // Access the variables using the namespace
-    double current_speed = RobotConfig::max_robot_speed * 0.8; // 80% of max speed
-    double current_turning_speed = RobotConfig::max_turning_speed * 0.5; // 50% of max turning speed
+    double current_speed = DrivetrainConstants::kMoveSpeed;
+    double current_turning_speed = DrivetrainConstants::kTurnSpeed;
 
     return 0;
 }
 ```
 
 ---
+`````````
