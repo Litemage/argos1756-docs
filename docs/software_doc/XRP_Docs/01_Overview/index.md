@@ -45,19 +45,5 @@ For instructions on how to setup the XRP robot for WPILib software, see [WPILib 
 
 ## XRP Tutorial overview
 
-1. Blockly XRP
-    1. This will teach you the basic of coding
-
-2. [C++ XRP Tank Drive](../../tutorials/XRP_Tank_Drive/tutorial_XRP_tank_drive.md)
-
-3. [C++ XRP Arcade Drive](../../tutorials/arcade-drive.md)
-
-4. C++ XRP Button drive
-
-5. C++ deadband
-
-6. C++ swerve drive
-
-
 ## Useful links
 

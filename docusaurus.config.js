@@ -126,14 +126,6 @@ const config = {
                 label: 'About',
                 to: '/docs/about',
               },
-              {
-                label: 'Summer CTRE Test Repo',
-                to: '/docs/summer-swerve',
-              },
-              {
-                label: 'XRP Docs',
-                to: '/docs/XRP Tutorials/XRP WPILib/',
-              },
             ],
           },
           {

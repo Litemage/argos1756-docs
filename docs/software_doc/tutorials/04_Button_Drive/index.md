@@ -13,6 +13,8 @@ Button drive is a control scheme where specific buttons on an Xbox controller ar
 - Pressing the **X** button turns the robot left.
 - Pressing the **B** button turns the robot right.
 
+![xbox controller](xbox_controller_button_drive.png)
+
 If you have some experience programming, try implementing this drive control now. Otherwise, read on for step-by-step instructions.
 
 ## The Pre-Code Workout 📊
@@ -75,17 +77,17 @@ Now that we understand how the code will work we need to define the input and ou
 ## Time to Start Coding
 
 ### Creating a project
-If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../XRP_project/tutorial_XRP_Project.md) If you have, it's time to start coding!
+If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../../XRP_Docs/03_XRP_project/index.md) If you have, it's time to start coding!
 
 ### Create a Drivetrain Subsystem
 
-The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](../../VS_Code_Docs/Create_Subsystem/creating_subsystem.md) for instructions on how to do this. You should name your subsystem `Drivetrain`.
+The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
 
 ### Drivetrain.h Header File
 
 Just as a reminder, the header (`.h`) file is like a table of contents for our code. It declares the functions that are available, but the actual instructions for those functions are written in the source (`.cpp`) file. We are about to add a new function declaration to our `Drivetrain.h`.  
 
-1. We need to tell the software we want to use the XRP robot motors. To do this we will need to include the header that declares the motor objects, see [Controlling a Motor](../XRP_WPILib/tutorial_XRP_WPILib.md#controlling-a-motor) for more details on controlling XRP robot motor.
+1. We need to tell the software we want to use the XRP robot motors. To do this we will need to include the header that declares the motor objects, see [Controlling a Motor](../WPILib_VS CodeDocs/tutorial_XRP_WPILib.md#controlling-a-motor) for more details on controlling XRP robot motor.
     1. We will need to add the following include to the top of the `Drivetrain.h` file
     ```cpp
     #include <frc/xrp/XRPMotor.h>
@@ -257,7 +259,7 @@ We will now need to open `RobotContainer.h`
      #include <frc/XboxController.h>
      #include <frc2/command/RunCommand.h>
      ```
-2.  Next, we need to create the actual `Drivetrain` and `XboxController` objects inside our `RobotContainer`. Think of this as giving the brain its own set of legs and ears to use. We'll declare these in the `private` section to keep our code organized. For more details on the controller, see the [Xbox Controller section in the WPILib tutorial](../XRP_WPILib/tutorial_XRP_WPILib.md#xbox-controller).
+2.  Next, we need to create the actual `Drivetrain` and `XboxController` objects inside our `RobotContainer`. Think of this as giving the brain its own set of legs and ears to use. We'll declare these in the `private` section to keep our code organized. For more details on the controller, see the [Xbox Controller section in the WPILib tutorial](<../../WPILib_VS CodeDocs/02_WPILib Software Quick Reference/index.md#xbox-controller>)
 
      ```cpp
      private:
@@ -410,7 +412,7 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
 
 
 ## Time to test your code
-Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](../XRP_Run_Code/tutorial_XRP_run_code.md) to test your code
+Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>) to test your code
 
 If everything is working correctly, you can now drive your XRP robot using the buttons
 

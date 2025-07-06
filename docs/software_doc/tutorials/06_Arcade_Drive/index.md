@@ -3,9 +3,11 @@ sidebar_position: 6
 ---
 # XRP Arcade Drive  
 ## Overview
-## XRP Arcade Drive Tutorial (C++ Command-Based)
+You saw that tank drive gave you a ton of control, but it was really hard to drive smoothly. Then, button drive was super easy to use, but you lost a lot of that fine-tuned control. Now, let's try arcade drive to find a good mix!
 
-Arcade drive is a control scheme where a single joystick is used to control both forward/backward movement and turning. The Y-axis of the joystick controls forward and backward motion, while the X-axis controls turning. This control scheme is intuitive and easy to learn.
+Arcade drive may be more familiar, because it is the basis of many video games. One joystick moves the robot forward and backward, and the second joystick turns left and right To do this, we will make the left joystick set a value for both motors and the right joystick will increase or decrease the motor speeds to turn the robot This control scheme offers less driver control, but it’s easy to learn and many drivers enjoy it  
+
+![Xbox Controller Arcade Drive](xbox_arcade.png)
 
 If you have already implemented the Tank Drive tutorial, you can build on that project to add Arcade Drive functionality. No need to create a new project!
 
@@ -118,4 +120,4 @@ If you haven't already completed the Tank Drive tutorial, see [Tank Drive Tutori
 
 ## Time to Test Your Code
 
-Congratulations! You've added Arcade Drive functionality to your Tank Drive project. Test your code by following the instructions in [XRP Run Code](../XRP_Run_Code/tutorial_XRP_run_code.md).
+Congratulations! You've added Arcade Drive functionality to your Tank Drive project. Test your code by following the instructions in [XRP Run Code](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>).
