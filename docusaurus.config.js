@@ -98,9 +98,15 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'docsSidebar',
+            sidebarId: 'softwareSidebar',
             position: 'left',
-            label: 'Documentation',
+            label: 'Software',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'MechanicalSidebar',
+            position: 'left',
+            label: 'Mechanical',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
@@ -119,14 +125,6 @@ const config = {
               {
                 label: 'About',
                 to: '/docs/about',
-              },
-              {
-                label: 'Summer CTRE Test Repo',
-                to: '/docs/summer-swerve',
-              },
-              {
-                label: 'XRP Docs',
-                to: '/docs/XRP Tutorials/XRP WPILib/',
               },
             ],
           },
