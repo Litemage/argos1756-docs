@@ -8,7 +8,11 @@ Simulation is a powerful tool that allows you to run and test your robot code on
 
 This guide will walk you through the steps to simulate your robot code using the WPILib simulator. This is also the method used for running code on the XRP robot.
 
-> **Important:** if you are testing your code on a physical XRP robot, you must also have the FRC Driver Station running with the robot enabled. For more details, please see the [FRC Driver Station Overview](../../FRC_Software_Tools/Driver Station/frc_driver_station.md).
+:::info[**Important**]
+
+**Important:** if you are testing your code on a physical XRP robot, you must also have the FRC Driver Station running with the robot enabled. For more details, please see the [FRC Driver Station Overview](../../FRC_Software_Tools/Driver Station/frc_driver_station.md).
+
+:::
 
 for more details about the simulator reference [Robot Simulation WPILib](https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/simulation-gui.html)
 
@@ -30,7 +34,11 @@ for more details about the simulator reference [Robot Simulation WPILib](https:/
     *   ![Terminal Window](Terminal_Window.png)
     *   Once the build is complete, a window called "Robot Simulation" will pop up.
 
-> **Note:** If you are following the "Hello, World!" tutorial, you have successfully run your code! You can now return to that tutorial. If you would like to learn more about the robot simulator, please continue reading.
+:::note
+
+If you are following the "Hello, World!" tutorial, you have successfully run your code! You can now return to that tutorial. If you would like to learn more about the robot simulator, please continue reading.
+
+:::
 
 ---
 
@@ -46,8 +54,15 @@ When you run the simulation, a window called the **"Robot Simulation"** will app
         * **Teleoperated:** Allows for manual control of the robot.
         * **Test:** Runs your test commands.
     * Most of your testing will be done using Teleoperated mode.
-    > **Note:** When testing XRP code, you must enable the robot using the [FRC Driver Station](<../../FRC_Software_Tools/Driver Station/index.md>) and select a robot state (e.g., Teleoperated) for your code to run.
-    *   ![Robot State](Robot_State.png)
+
+:::note
+
+When testing XRP code, you must enable the robot using the [FRC Driver Station](<../../FRC_Software_Tools/Driver Station/index.md>) and select a robot state (e.g., Teleoperated) for your code to run.
+
+:::
+
+![Robot State](Robot_State.png)
+
     
 2. **Simulator Joystick**
     * The **System Joysticks** list shows all controllers connected to your computer. To use one in the simulation, drag it from the **System Joysticks** list to the **Joysticks** list below it. This assigns it to a port that your robot code can access.
