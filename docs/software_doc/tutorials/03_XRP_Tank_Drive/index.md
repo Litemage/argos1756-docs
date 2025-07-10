@@ -459,6 +459,6 @@ void Drivetrain::Periodic() {}
  </details>
 
 ## Time to test your code
-Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>) to test your code.
+Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>) to test your code.
 
 If everything is working correctly, you can now drive your XRP robot using the left and right joysticks.

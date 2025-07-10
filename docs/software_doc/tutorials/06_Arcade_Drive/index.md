@@ -120,4 +120,4 @@ If you haven't already completed the Tank Drive tutorial, see [Tank Drive Tutori
 
 ## Time to Test Your Code
 
-Congratulations! You've added Arcade Drive functionality to your Tank Drive project. Test your code by following the instructions in [XRP Run Code](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>).
+Congratulations! You've added Arcade Drive functionality to your Tank Drive project. Test your code by following the instructions in [XRP Run Code](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>).
