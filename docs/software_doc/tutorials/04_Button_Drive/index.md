@@ -81,7 +81,7 @@ If you haven't already created an XRP project, you'll need to do that now. See [
 
 ### Create a Drivetrain Subsystem
 
-The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
+The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
 
 ### Drivetrain.h Header File
 
@@ -412,7 +412,7 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
 
 
 ## Time to test your code
-Great job writing your first XRP code.  it is time to test your code.  Go to [XRP Run Code](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>) to test your code
+Great job writing your first XRP code.  it is time to test your code. Go to [XRP Run Code](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>) to test your code
 
 If everything is working correctly, you can now drive your XRP robot using the buttons
 
