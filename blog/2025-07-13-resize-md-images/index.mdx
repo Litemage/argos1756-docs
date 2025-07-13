@@ -1,0 +1,74 @@
+---
+slug: resize-md-images
+title: How to Resize Markdown Images
+authors: [mentor]
+tags: [Intro]
+---
+import firstLogo from './FIRST-logo.jpg'
+
+When writing Markdown docs, you may find yourself in a scenario where you need to resize
+an image. We'll walk through how to resize an image inside of your Markdown file.
+
+{/* truncate */}
+
+First off, the usual way we insert images into our Markdown is like this:
+
+```md
+![alternate text](link/to/image)
+```
+
+For example, this code:
+
+```md
+![FIRST logo](FIRST-logo.jpg)
+```
+
+Results in this image:
+
+![FIRST logo](FIRST-logo.jpg)
+
+The logo is a little big, but how can you resize it? 
+
+In Docusaurus, you can actually write `.mdx` files instead of `.md`. The difference
+is that `.mdx` supports some `.jsx` syntax and importing. 
+
+JSX is it's own can of worms with lots of features, but what's relevant for inserting
+and resizing images is that you must ensure that your file extension for whatever you
+are working on is `.mdx` rather than `.md`. This tells the site you are using 
+`.mdx` import syntax.
+
+Then, at the top of your file, import the images you are going to use:
+
+:::danger[Don't put imports in frontmatter]
+
+Note that "top of file" here means BELOW the frontmatter (between the two `---` at the top).
+If your file has no frontmatter, this doesn't apply to your specific file.
+
+:::
+
+```mdx
+import firstLogo from './FIRST-logo.jpg'
+```
+
+Then, when you want to use the image:
+
+```mdx
+<img 
+    src={firstLogo} 
+    alt="FIRST Logo"
+    width="200"
+/>
+```
+
+<img 
+    src={firstLogo} 
+    alt="FIRST Logo"
+    width="200"
+/>
+
+Note that this is just one of three ways to import images. You can read more
+[here](https://docusaurus.io/docs/markdown-features/assets#images) on Docusaurus' documentation.
+
+The method showed here is the recommended way to add images for this documentaiton.
+
+For a full example, see this blog post in code to see how we handle images.
