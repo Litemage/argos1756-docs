@@ -1,16 +1,20 @@
 ---
 sidebar_position: 2
 ---
+import drill_bit from './drill_bit.png'
+import tap from './tap.png'
+
+
 # Drills and Taps
 
 ## What are Drills and Taps?
 
 Think of it like this:
 1.  **Drill:** You use a drill to make a hole
-    ![drill bit](drill_bit.png)
+    <img src={drill_bit} width="400"/>
 
 2.  **Tap:** You use a **tap** to cut threads on the inside of that hole, so you can screw a bolt into it.
-    ![Tap](tap.png)
+    <img src={tap} width="400"/>
 
 So, you **drill** the hole first, then **tap** it to add the threads.
 
@@ -21,7 +25,7 @@ So, you **drill** the hole first, then **tap** it to add the threads.
 - **Free Fit:** A hole drilled larger than the bolt, allowing the bolt to pass through easily.
 
 ## Drill and tap chart
-![tap and drill chart](Tap_and_drill_Chart.png)
+![alt text](Tap_and_drill_Chart.png)
 
 ## Argos Color code
  
