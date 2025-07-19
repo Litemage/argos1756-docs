@@ -4,6 +4,138 @@ sidebar_position: 2
 
 # C++ Quick Reference
 
+## File Types: .h and .cpp Files
+
+In C++, code is typically organized into two types of files:
+
+### Header Files (.h)
+Header files contain **declarations** - they tell the compiler what functions, classes, and variables exist, but not how they work.
+
+Think of a header file like a **table of contents** or **menu** at a restaurant - it lists what's available but doesn't contain the full recipe or instructions.
+
+**Why do we need header files?**
+- They let other parts of your program know what functions and classes are available to use
+- They act like a "promise" - telling the compiler "these things exist, trust me"
+- They allow you to organize your code into separate files
+
+**What goes in .h files:**
+- **Include statements** (`#include`) - Bringing in other header files that this file needs
+- **Function declarations** (what the function looks like) - Just the name, what it takes in, and what it gives back
+- **Class definitions** (what properties and methods a class has) - The blueprint of the class
+- **Variable declarations** - Telling the compiler a variable exists somewhere
+- **Constants and definitions** - Fixed values that won't change
+
+**Example - Drivetrain.h:**
+```cpp
+#pragma once
+
+#include <frc/xrp/XRPMotor.h>
+#include <frc2/command/SubsystemBase.h>
+
+class Drivetrain : public frc2::SubsystemBase {
+ public:
+  Drivetrain();
+
+  // A function to drive the robot with tank-style controls.
+  // It takes a speed for the left side and a speed for the right side.
+  void TankDrive(double leftSpeed, double rightSpeed);
+  
+  /**
+   * Will be called periodically whenever the CommandScheduler runs.
+   */
+  void Periodic() override;
+
+ private:
+  // Components (e.g. motor controllers and sensors) should generally be
+  // declared private and exposed only through public methods.
+
+  // This creates an object for the left motor on channel 0
+  frc::XRPMotor m_left_motor{0};
+  // This creates an object for the right motor on channel 1
+  frc::XRPMotor m_right_motor{1};
+};
+```
+
+### Source Files (.cpp)
+Source files contain **definitions** - they contain the actual code that does the work.
+
+Think of a source file like the **full recipe** with step-by-step instructions, or like the actual kitchen where the cooking happens.
+
+**Why do we need source files?**
+- They contain the "meat" of your program - the actual working code
+- They implement the promises made in the header files
+- They do the real work when your program runs
+
+**What goes in .cpp files:**
+- **Function implementations** (the actual code that runs) - The detailed steps of what the function does
+- **The detailed code for class methods** - How each function in a class actually works
+- **The main program logic** - The code that gets executed when you run your program
+- **Include statements** - Bringing in the header files so you can use what's declared there
+
+**Example - Drivetrain.cpp:**
+```cpp
+#include "subsystems/Drivetrain.h"
+
+Drivetrain::Drivetrain() = default;
+
+// This is the definition of our TankDrive function.
+// The code inside the curly braces {} is what runs when we call this function.
+void Drivetrain::TankDrive(double leftSpeed, double rightSpeed) {
+  // This line tells our left motor object to set its speed to the value of leftSpeed.
+      m_left_motor.Set(leftSpeed);
+  // This line does the same for the right motor, using the rightSpeed value.
+      m_right_motor.Set(-rightSpeed);
+}
+
+// This method will be called once per scheduler run
+void Drivetrain::Periodic() {}
+```
+
+### Simple Rule of Thumb:
+- **.h file:** "What can this code do?" (the interface/promise)
+  - Like a job description - it tells you what skills someone has
+- **.cpp file:** "How does this code actually work?" (the implementation/actual work)
+  - Like watching someone actually do the job
+
+---
+
+## Flow Charts
+
+Flow charts are visual representations of the flow of a program. They use symbols to represent different types of actions or steps in a process.
+
+**Common Flowchart Shapes:**
+
+- **🟩 Rectangle (Box)**: Represents an action or process step
+  - Example: "Set motor speed" or "Calculate result"
+  - This is where your program *does* something
+
+- **💎 Diamond**: Represents a decision or question
+  - Example: "Is age >= 18?" or "Is button pressed?"
+  - This is where your program *decides* what to do next
+  - Always has "Yes/No" or "True/False" arrows coming out
+
+- **🟢 Circle/Oval**: Represents start or end points
+  - "Start" - where your program begins
+  - "End" - where your program finishes
+
+- **➡️ Arrows**: Show the direction of flow
+  - Tell you which step comes next
+  - From diamonds, they're labeled with the decision result (Yes/No)
+
+**Example:**
+Consider a program that checks if a person is old enough to vote (age 18 or older).
+
+```mermaid
+graph TD
+    Start[Start] --> CheckAge{Is age >= 18?}
+    CheckAge -->|Yes| Vote[You can vote]
+    CheckAge -->|No| NoVote[You cannot vote]
+    Vote --> End[End]
+    NoVote --> End[End]
+```
+
+---
+
 ## Variables and Data Types
 
 Variables are used to store data in your program. In C++, you must declare a variable with a specific data type.
@@ -22,24 +154,6 @@ double pi = 3.14159;
 char grade = 'A';
 bool isStudent = true;
 std::string name = "John";
-```
-
----
-
-## Flow Charts
-
-Flow charts are visual representations of the flow of a program. They use symbols to represent different types of actions or steps in a process.
-
-**Example:**
-Consider a program that checks if a person is old enough to vote (age 18 or older).
-
-```mermaid
-graph TD
-    Start[Start] --> CheckAge{Is age >= 18?}
-    CheckAge -->|Yes| Vote[You can vote]
-    CheckAge -->|No| NoVote[You cannot vote]
-    Vote --> End[End]
-    NoVote --> End[End]
 ```
 
 ---
@@ -355,4 +469,3 @@ int main() {
 ```
 
 ---
-`````````
