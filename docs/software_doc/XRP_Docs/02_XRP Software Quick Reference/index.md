@@ -119,8 +119,8 @@ sidebar_position: 2
 
  You create an `XRPServo` object by specifying its device number. The XRP has two servo ports:
 
- *   **Servo 1:** Device Number 0
- *   **Servo 2:** Device Number 1
+ *   **Servo 1:** Device Number 4
+ *   **Servo 2:** Device Number 5
 
  ```cpp
  // Create a servo object for the servo connected to port 1 on the XRP

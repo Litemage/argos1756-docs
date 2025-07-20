@@ -3,67 +3,89 @@ sidebar_position: 2
 ---
 # WPILib software quick reference
 
-## Xbox Controller
+## Xbox Controller (FRC2 Command-Based)
 
- To control the robot with a gamepad, you can use the `frc::XboxController` class. This class provides an easy way to read the state of all buttons and joysticks.
+ To control the robot with a gamepad in command-based programming, you can use the `frc2::CommandXboxController` class. This class extends the traditional `frc::XboxController` with `Trigger` factories that integrate seamlessly with the command-based framework.
 
- For more details, see the [WPILib XboxController Class Reference](https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_xbox_controller.html).
+ For more details, see the [WPILib CommandXboxController Class Reference](https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc2_1_1_command_xbox_controller.html).
 
- To use the `XboxController` class, you need to include its header file:
+ To use the `CommandXboxController` class, you need to include its header file:
 
  ```cpp
- #include <frc/XboxController.h>
+ #include <frc2/command/button/CommandXboxController.h>
  ```
 
  **Constructor**
 
- You need to create an `XboxController` object, specifying the USB port it's connected to on the driver station (usually `0` for the primary controller).
+ You need to create a `CommandXboxController` object, specifying the USB port it's connected to on the driver station (usually `0` for the primary controller).
 
  ```cpp
  // Create a controller object on port 0
- frc::XboxController m_controller{0};
+ frc2::CommandXboxController m_controller{0};
  ```
 
- **Button Mappings**
+ **Button Mappings (Trigger-Based)**
 
- The buttons are accessed using methods that return `true` if the button is currently pressed.
+ The buttons return `frc2::Trigger` objects that can be used to bind commands. This is the preferred approach for command-based programming.
 
- *   **A Button:** `GetAButton()`
- *   **B Button:** `GetBButton()`
- *   **X Button:** `GetXButton()`
- *   **Y Button:** `GetYButton()`
- *   **Left Bumper:** `GetLeftBumper()`
- *   **Right Bumper:** `GetRightBumper()`
- *   **Back Button:** `GetBackButton()`
- *   **Start Button:** `GetStartButton()`
- *   **Left Stick Button:** `GetLeftStickButton()`
- *   **Right Stick Button:** `GetRightStickButton()`
+ *   **A Button:** `A()`
+ *   **B Button:** `B()`
+ *   **X Button:** `X()`
+ *   **Y Button:** `Y()`
+ *   **Left Bumper:** `LeftBumper()`
+ *   **Right Bumper:** `RightBumper()`
+ *   **Back Button:** `Back()`
+ *   **Start Button:** `Start()`
+ *   **Left Stick Button:** `LeftStick()`
+ *   **Right Stick Button:** `RightStick()`
+ *   **Left Trigger:** `LeftTrigger(double threshold = 0.5)` (trigger when axis > threshold)
+ *   **Right Trigger:** `RightTrigger(double threshold = 0.5)` (trigger when axis > threshold)
 
  **Axis Mappings**
 
- The axes (joysticks and triggers) return values from -1.0 to 1.0. Note that for the joysticks, the Y-axis is inverted (pushing up gives a negative value).
+ The axes (joysticks and triggers) return values from -1.0 to 1.0. Note that for the joysticks, back is positive (different from the traditional XboxController).
 
- *   **Left Stick X-Axis:** `GetLeftX()`
- *   **Left Stick Y-Axis:** `GetLeftY()`
- *   **Right Stick X-Axis:** `GetRightX()`
- *   **Right Stick Y-Axis:** `GetRightY()`
+ *   **Left Stick X-Axis:** `GetLeftX()` (right is positive)
+ *   **Left Stick Y-Axis:** `GetLeftY()` (back is positive)
+ *   **Right Stick X-Axis:** `GetRightX()` (right is positive)
+ *   **Right Stick Y-Axis:** `GetRightY()` (back is positive)
  *   **Left Trigger:** `GetLeftTriggerAxis()` (range: 0.0 to 1.0)
  *   **Right Trigger:** `GetRightTriggerAxis()` (range: 0.0 to 1.0)
 
- **Usage Example**
+ **Usage Examples**
 
- This example shows how to use the left joystick's Y-axis to control the speed of the left motor.
+ **Example 1: Binding Commands to Buttons**
+ ```cpp
+ // Bind a command to the A button (runs when pressed)
+ m_controller.A().OnTrue(SomeCommand());
 
+ // Bind a command to run while B button is held
+ m_controller.B().WhileTrue(SomeOtherCommand());
+
+ // Use trigger with custom threshold
+ m_controller.LeftTrigger(0.7).OnTrue(TriggerCommand());
+ ```
+
+ **Example 2: Using Joystick Values**
  ```cpp
  // Get the Y-axis value from the left joystick (-1.0 to 1.0).
+ // Note: back is positive in CommandXboxController
  double left_y_position = m_controller.GetLeftY();
 
- // Set the motor speed using the joystick value. The value is negated 
- // because GetLeftY() is inverted by default.
- m_left_motor.Set(-left_y_position);
+ // Set the motor speed using the joystick value
+ m_left_motor.Set(left_y_position);
 
- // GetAButton() returns a boolean (true if pressed).
- bool a_button_pressed = m_controller.GetAButton();
+ // Get X-axis for turning (right is positive)
+ double turn_value = m_controller.GetRightX();
+ ```
+
+ **Accessing the Underlying XboxController**
+
+ If you need access to the traditional button methods (like `GetAButton()`), you can access the underlying controller:
+
+ ```cpp
+ // Access the underlying frc::XboxController
+ bool a_button_pressed = m_controller.GetHID().GetAButton();
  ```
 _____________________________________________________________________________________________________________________________________________________
 
