@@ -3,7 +3,7 @@ sidebar_position: 2
 ---
 # WPILib software quick reference
 
-## Xbox Controller (FRC2 Command-Based)
+## Xbox Controller
 
  To control the robot with a gamepad in command-based programming, you can use the `frc2::CommandXboxController` class. This class extends the traditional `frc::XboxController` with `Trigger` factories that integrate seamlessly with the command-based framework.
 

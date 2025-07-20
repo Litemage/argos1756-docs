@@ -17,6 +17,23 @@ const config = {
     mermaid: true
   },
   themes: ['@docusaurus/theme-mermaid'],
+  plugins: [
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+        language: ["en"],
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+        docsRouteBasePath: '/docs',
+        blogRouteBasePath: '/blog',
+        searchResultLimits: 8,
+        searchResultContextMaxLength: 50,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
   trailingSlash: true,
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -96,6 +113,10 @@ const config = {
           src: 'img/favicon.png',
         },
         items: [
+          {
+            type: 'search',
+            position: 'right',
+          },
           {
             type: 'docSidebar',
             sidebarId: 'softwareSidebar',
