@@ -135,6 +135,12 @@ const config = {
             position: 'left',
             label: 'Electrical',
           },
+           {
+            type: 'docSidebar',
+            sidebarId: 'RobotSidebar',
+            position: 'left',
+            label: 'Robot',
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/Litemage/argos1756-docs',
