@@ -17,6 +17,23 @@ const config = {
     mermaid: true
   },
   themes: ['@docusaurus/theme-mermaid'],
+  plugins: [
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+        language: ["en"],
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+        docsRouteBasePath: '/docs',
+        blogRouteBasePath: '/blog',
+        searchResultLimits: 8,
+        searchResultContextMaxLength: 50,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
   trailingSlash: true,
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -97,6 +114,10 @@ const config = {
         },
         items: [
           {
+            type: 'search',
+            position: 'right',
+          },
+          {
             type: 'docSidebar',
             sidebarId: 'softwareSidebar',
             position: 'left',
@@ -107,6 +128,18 @@ const config = {
             sidebarId: 'MechanicalSidebar',
             position: 'left',
             label: 'Mechanical',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'ElectricalSidebar',
+            position: 'left',
+            label: 'Electrical',
+          },
+           {
+            type: 'docSidebar',
+            sidebarId: 'RobotSidebar',
+            position: 'left',
+            label: 'Robot',
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {

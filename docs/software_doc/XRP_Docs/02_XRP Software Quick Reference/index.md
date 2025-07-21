@@ -119,8 +119,8 @@ sidebar_position: 2
 
  You create an `XRPServo` object by specifying its device number. The XRP has two servo ports:
 
- *   **Servo 1:** Device Number 0
- *   **Servo 2:** Device Number 1
+ *   **Servo 1:** Device Number 4
+ *   **Servo 2:** Device Number 5
 
  ```cpp
  // Create a servo object for the servo connected to port 1 on the XRP
@@ -186,3 +186,62 @@ sidebar_position: 2
  // Print the values to the console
  std::cout << "Left Sensor: " << left_value << ", Right Sensor: " << right_value << std::endl;
  ```
+---
+## XRP LED and User Button
+
+ The XRP has an onboard yellow LED and USER button that can be used for status indication and user input. These are managed by the `frc::XRPOnBoardIO` class.
+
+ For more details, see the [WPILib XRPOnBoardIO Class Reference](https://github.wpilib.org/allwpilib/docs/release/cpp/classfrc_1_1_x_r_p_on_board_i_o.html).
+
+ To use the LED and button, you need to include the `XRPOnBoardIO` header file:
+
+ ```cpp
+ #include <frc/xrp/XRPOnBoardIO.h>
+ #include <iostream>
+ ```
+
+ **Constructor**
+
+ You can construct an `XRPOnBoardIO` object without any parameters. It automatically handles both the LED and user button.
+
+ ```cpp
+ // Create an object for the onboard IO (LED and button)
+ frc::XRPOnBoardIO m_onboard_io;
+ ```
+
+ **Common Methods**
+
+ *   `SetLed(bool value)`: Sets the yellow LED state. Pass `true` to turn it on, `false` to turn it off.
+ *   `GetLed()`: Returns the current LED state as a `bool` (`true` = on, `false` = off).
+ *   `GetUserButtonPressed()`: Returns `true` if the USER button is currently pressed, `false` otherwise.
+
+ **Usage Example**
+
+ This example shows how to control the LED and read the user button state.
+
+ ```cpp
+ // Turn on the LED
+ m_onboard_io.SetLed(true);
+
+ // Check if the user button is pressed
+ bool button_pressed = m_onboard_io.GetUserButtonPressed();
+
+ if (button_pressed) {
+     // Toggle the LED when button is pressed
+     bool current_led_state = m_onboard_io.GetLed();
+     m_onboard_io.SetLed(!current_led_state);
+     
+     std::cout << "Button pressed! LED toggled." << std::endl;
+ }
+
+ // Print current states
+ std::cout << "LED State: " << (m_onboard_io.GetLed() ? "ON" : "OFF") << std::endl;
+ std::cout << "Button State: " << (button_pressed ? "PRESSED" : "RELEASED") << std::endl;
+ ```
+
+ **Common Use Cases**
+
+ *   **Status Indicator**: Turn LED on/off to show robot state (autonomous, teleop, error conditions)
+ *   **User Feedback**: Blink LED to indicate sensor readings or robot actions
+ *   **Button Control**: Use the USER button to start/stop actions, toggle modes, or reset systems
+ *   **Debugging**: Flash LED patterns to indicate different program states during development
