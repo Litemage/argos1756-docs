@@ -3,6 +3,7 @@ sidebar_position: 3
 ---
 import half_link from './half_link.png'
 import chain_tension from './chain_tension.png'
+import ChainCalculator from '@site/src/components/ChainCalculator'
 
 # Chain & Sprocket Overview
 
@@ -34,6 +35,9 @@ Argos uses **#25 Roller Chain**
 
 ## How to Calculate Chain Center Distance
 
+<ChainCalculator />
+
+### External Calculator Reference
 [Center Distance Calculator](https://electricscooterparts.com/chainlengthcalculator.html)
 
 **If Sprockets are the Same Size**

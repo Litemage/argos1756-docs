@@ -35,6 +35,11 @@ We use **HTD 5mm belts** and **HTD 5mm pulleys** with hex shafts. The standard p
 ## How to Calculate Belt Center Distance and Size
 [Belt Calculator](https://wcproducts.com/pages/calculator-belt)
 
+### Belt Calculator
+
+import BeltCalculator from '@site/src/components/BeltCalculator';
+
+<BeltCalculator />
 
 ### Pulleys are the Same Diameter
 

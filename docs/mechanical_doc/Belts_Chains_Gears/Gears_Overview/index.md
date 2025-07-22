@@ -48,16 +48,19 @@ Center Distance = ((N1+N2)/(2 x DP)) + Extra_Distance
 - **DP** is the diametral pitch (the number of teeth per inch of pitch diameter)
 - **Extra_Distance** = account for manufacturing tolerances and ensure smooth operation (Should be 0.003 in)
 
-**Example**
+### Gear Calculator
 
-**Gear 1:** 20DP, 60 tooth  
-**Gear 2:** 20DP, 20 tooth
+import GearCalculator from '@site/src/components/GearCalculator';
 
-```
-Center Distance = ((60+20)/(2x20))+0.003 = 2.003 in
-```
+<GearCalculator />
 
 ![alt text](Centure_Distance.png)
+
+### Motor Performance Calculator
+
+import MotorCalculator from '@site/src/components/MotorCalculator';
+
+<MotorCalculator />
 
 ---
 
