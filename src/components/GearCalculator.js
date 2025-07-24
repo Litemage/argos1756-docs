@@ -125,6 +125,9 @@ Center Distance = ${centerDistance.toFixed(3)} inches`);
             color: 'var(--ifm-color-content)'
           }}
         />
+        <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-700)', marginTop: '4px'}}>
+          Recommended: 0.003 inches
+        </div>
       </div>
       
       {showResult && (
