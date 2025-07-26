@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { WCP_HTD_9MM_BELT_SIZES, ARGOS_STOCKED_BELT_SIZES } from './StockedBeltSizes';
+import { WCP_HTD_9MM_BELT_SIZES, ARGOS_STOCKED_BELT_SIZES } from './ArgosStock';
 
 export const BeltCalculator = () => {
   const [pitch, setPitch] = useState('5');

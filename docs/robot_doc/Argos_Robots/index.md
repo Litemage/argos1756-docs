@@ -174,3 +174,9 @@ import Argos_2017_Robot from './Argos_2017.png'
 - **Midwest Regional** - Rookie All-Star Award, Regional Winner, Autodesk Visualization Award, Highest Rookie Seed Award
 - **Archimedes Division** - Competed at World Championships
 - **Einstein Field** - Autodesk Rising Star Visualization Award
+
+
+
+import TagCalculator from '@site/src/components/TagCalculator';
+
+<TagCalculator />
