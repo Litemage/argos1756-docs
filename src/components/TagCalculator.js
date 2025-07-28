@@ -102,60 +102,55 @@ export default function TagCalculator() {
           }}
           onClick={() => setModalImg(null)}
         >
-          <div style={{textAlign: 'center'}}>
+          <div style={{textAlign: 'center', maxWidth: '90vw', maxHeight: '90vh', overflowY: 'auto', background: 'rgba(0,0,0,0.85)', borderRadius: '12px', padding: '2em 1em'}}>
             <img
               src={modalImg.src}
               alt={Object.keys(modalImg.tagInventory).join(', ')}
-              style={{maxWidth: '80vw', maxHeight: '80vh', boxShadow: '0 0 20px #000'}}
+              style={{maxWidth: '80vw', maxHeight: '40vh', boxShadow: '0 0 20px #000', marginBottom: '1em'}}
             />
-            {/* Show matched tag and inventory in modal if a tag is matched in the current search */}
+            {/* Inventory tables are always scrollable if too large */}
             {(() => {
               // Helper to render inventory as a table
-          const renderInventoryTable = (entries) => {
-            // Split entries into two separate tables
-            const half = Math.ceil(entries.length / 2);
-            const leftEntries = entries.slice(0, half);
-            const rightEntries = entries.slice(half);
-            return (
-              <div style={{display: 'flex', gap: '16px', maxHeight: '50vh', overflowY: 'auto', margin: '1em auto 0 auto', minWidth: '480px'}}>
-                <table style={{width: '50%', color: '#fff', background: 'rgba(0,0,0,0.5)', borderCollapse: 'collapse', fontSize: '1.1em', boxShadow: '0 0 10px #000'}}>
-                  <tbody>
-                    {leftEntries.map(([tag, count], idx) => (
-                      <tr key={idx}>
-                        <td style={{padding: '0.4em 1em', fontWeight: 'bold'}}>{tag.replace(/\b\w/g, c => c.toUpperCase())}</td>
-                        <td style={{padding: '0.4em 1em', color: '#ffd700', textAlign: 'right'}}>{count !== undefined && count !== null && count !== 'unknown' ? count : 'N/A'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <table style={{width: '50%', color: '#fff', background: 'rgba(0,0,0,0.5)', borderCollapse: 'collapse', fontSize: '1.1em', boxShadow: '0 0 10px #000'}}>
-                  <tbody>
-                    {rightEntries.map(([tag, count], idx) => (
-                      <tr key={idx}>
-                        <td style={{padding: '0.4em 1em', fontWeight: 'bold'}}>{tag.replace(/\b\w/g, c => c.toUpperCase())}</td>
-                        <td style={{padding: '0.4em 1em', color: '#ffd700', textAlign: 'right'}}>{count !== undefined && count !== null && count !== 'unknown' ? count : 'N/A'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            );
+              const renderInventoryTable = (entries) => {
+                const half = Math.ceil(entries.length / 2);
+                const leftEntries = entries.slice(0, half);
+                const rightEntries = entries.slice(half);
+                return (
+                  <div style={{display: 'flex', gap: '16px', maxHeight: '40vh', overflowY: 'auto', margin: '1em auto 0 auto', minWidth: '480px', justifyContent: 'center'}}>
+                    <table style={{width: '50%', color: '#fff', background: 'rgba(0,0,0,0.5)', borderCollapse: 'collapse', fontSize: '1.1em', boxShadow: '0 0 10px #000'}}>
+                      <tbody>
+                        {leftEntries.map(([tag, count], idx) => (
+                          <tr key={idx}>
+                            <td style={{padding: '0.4em 1em', fontWeight: 'bold'}}>{tag.replace(/\b\w/g, c => c.toUpperCase())}</td>
+                            <td style={{padding: '0.4em 1em', color: '#ffd700', textAlign: 'right'}}>{count !== undefined && count !== null && count !== 'unknown' ? count : 'N/A'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <table style={{width: '50%', color: '#fff', background: 'rgba(0,0,0,0.5)', borderCollapse: 'collapse', fontSize: '1.1em', boxShadow: '0 0 10px #000'}}>
+                      <tbody>
+                        {rightEntries.map(([tag, count], idx) => (
+                          <tr key={idx}>
+                            <td style={{padding: '0.4em 1em', fontWeight: 'bold'}}>{tag.replace(/\b\w/g, c => c.toUpperCase())}</td>
+                            <td style={{padding: '0.4em 1em', color: '#ffd700', textAlign: 'right'}}>{count !== undefined && count !== null && count !== 'unknown' ? count : 'N/A'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                );
               };
-              if (smartInventory && modalImg.tagInventory) {
-                if (query) {
+              if (modalImg && modalImg.tagInventory) {
+                if (smartInventory && query) {
                   const matchedTag = Object.keys(modalImg.tagInventory).find(tag => tag.toLowerCase().includes(query.toLowerCase()));
                   if (matchedTag) {
-                    const inventory = modalImg.tagInventory[matchedTag];
-                    return renderInventoryTable([[matchedTag, inventory]]);
+                    return renderInventoryTable([[matchedTag, modalImg.tagInventory[matchedTag]]]);
+                  } else {
+                    // If no match, show nothing
+                    return <div style={{color:'#fff', fontSize:'1.2em', margin:'1em'}}>No matching inventory found for this tag.</div>;
                   }
                 }
-                // If no query, show all inventory tags
-                if (!query) {
-                  return renderInventoryTable(Object.entries(modalImg.tagInventory));
-                }
-              }
-              if (!smartInventory && modalImg.tagInventory) {
-                // Show all inventory items if Smart Inventory is off
+                // Otherwise show all inventory
                 return renderInventoryTable(Object.entries(modalImg.tagInventory));
               }
               return null;
