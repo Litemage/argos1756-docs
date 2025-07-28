@@ -10,15 +10,39 @@ function getReference(references, token) {
   return references[token] || references['#' + token] || references[token.replace(/^#/, '')] || commonReferences[token] || commonReferences['#' + token] || commonReferences[token.replace(/^#/, '')];
 }
 
-export default function InteractiveCodeReference({ allowCustom = true, showDropdown = true, snippet }) {
+export default function InteractiveCodeReference({ allowCustom = true, showDropdown = true, snippet, code, children }) {
   const initialSnippet = snippet || 'Drivetrain Example';
   const [selectedSnippet, setSelectedSnippet] = useState(initialSnippet);
   const [selected, setSelected] = useState(null);
   const [customMode, setCustomMode] = useState(false);
   const [customCode, setCustomCode] = useState('');
-  const code = customMode ? customCode : codeSnippets[selectedSnippet].code;
-  const references = customMode ? {} : codeSnippets[selectedSnippet].references;
-  const lines = code.split('\n');
+  // If allowCustom is false and children is present, use children as code
+  let codeToShow = '';
+  if (!allowCustom && children) {
+    if (typeof children === 'string') {
+      codeToShow = children.trim();
+    } else if (Array.isArray(children)) {
+      codeToShow = children.map(child => typeof child === 'string' ? child : '').join('').trim();
+    }
+  } else if (allowCustom && customMode) {
+    codeToShow = customCode;
+  } else if (allowCustom && !customMode) {
+    codeToShow = codeSnippets[selectedSnippet]?.code || '';
+  } else if (snippet && codeSnippets[snippet]) {
+    codeToShow = codeSnippets[snippet].code;
+  } else if (code) {
+    codeToShow = code;
+  }
+  const references = customMode ? {} : (snippet && codeSnippets[snippet]?.references) || {};
+  const lines = codeToShow.split('\n');
+
+  // Copy button logic
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeToShow);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
   return (
     <div style={{
@@ -32,8 +56,37 @@ export default function InteractiveCodeReference({ allowCustom = true, showDropd
       overflowX: 'auto',
       position: 'relative'
     }}>
+      <style>{`
+        .interactive-code-selected-line {
+          color: #fff !important;
+        }
+        html[data-theme='dark'] .interactive-code-selected-line {
+          color: #000 !important;
+        }
+      `}</style>
       <div style={{display: 'flex', alignItems: 'center', marginBottom: '1em', gap: '1em'}}>
         <span style={{fontWeight: 'bold'}}>Code Example:</span>
+        {!allowCustom && (
+          <button
+            onClick={handleCopy}
+            style={{
+              marginLeft: '1em',
+              background: 'var(--ifm-color-emphasis-200)',
+              border: 'none',
+              borderRadius: 4,
+              padding: '0.3em 0.8em',
+              fontSize: '1em',
+              cursor: 'pointer',
+              color: 'var(--ifm-color-primary)',
+              fontWeight: 'bold',
+              transition: 'background 0.2s',
+              position: 'relative'
+            }}
+            title="Copy code"
+          >
+            {copied ? 'Copied!' : 'Copy'}
+          </button>
+        )}
         {!customMode && showDropdown && (
           <select value={selectedSnippet} onChange={e => { setSelectedSnippet(e.target.value); setSelected(null); }} style={{fontSize: '1em', padding: '0.2em 0.5em', borderRadius: 4}}>
             {Object.keys(codeSnippets).map(name => (
@@ -116,13 +169,13 @@ export default function InteractiveCodeReference({ allowCustom = true, showDropd
         {lines.map((line, i) => (
           <div
             key={i}
+            className={selected === `line-${i}` ? 'interactive-code-selected-line' : ''}
             style={{
               display: 'flex',
               alignItems: 'center',
               minHeight: '1.6em',
               lineHeight: '1.6em',
               background: selected === `line-${i}` ? 'var(--ifm-color-primary)' : 'transparent',
-              color: selected === `line-${i}` ? '#fff' : undefined,
               borderRadius: 4,
               cursor: 'pointer',
               padding: '0 2px',
@@ -178,6 +231,14 @@ export default function InteractiveCodeReference({ allowCustom = true, showDropd
           ? (() => {
               const idx = parseInt(selected.replace('line-', ''));
               const line = lines[idx];
+              // If the line is a comment, show 'Comment' explanation
+              if (line.trim().startsWith('//')) {
+                return (
+                  <div style={{marginBottom: '0.5em', color: 'var(--ifm-color-primary)'}}>
+                    <strong>Line Explanation:</strong> Comment
+                  </div>
+                );
+              }
               // Check for a full line reference
               const lineRef = getReference(references, line);
               // Find all tokens in the line that have references

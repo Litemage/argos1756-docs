@@ -185,8 +185,17 @@ import TagCalculator from '@site/src/components/TagCalculator';
 
 import InteractiveCodeReference from '@site/src/components/InteractiveCodeReference';
 
-<InteractiveCodeReference allowCustom={false} showDropdown={false} snippet="Hello World" />
+
+<InteractiveCodeReference allowCustom={false} showDropdown={false}>
+{`
+// This is a custom C++ code example
+int main() {
+    return 0;
+#include 'stuff'
+}
+`}
+</InteractiveCodeReference>
 
 ## Interactive Code Reference (With Custom Code)
 
-<InteractiveCodeReference allowCustom={true} />
+<InteractiveCodeReference allowCustom={true} showDropdown={true} />
