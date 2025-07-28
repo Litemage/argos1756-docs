@@ -7,13 +7,12 @@ export const WCP_HTD_9MM_BELT_SIZES = [
   190, 195, 200, 210, 220, 225, 230, 240, 250, 260, 270, 280, 290, 300
 ];
 
-// Argos Stocked Belts (example list, update as needed)
-export const ARGOS_STOCKED_BELT_SIZES = [
-  70
-];
-// Stock image data for tag search
-export const stockImages = [
-  { name: 'Box 1', src: '/argos1756-docs/img/Stock/Box_1.png', tags: ['hex bearing','Shaft Collar','Hex Bushing','Hex 3D printed inserts','Bearing 1/4','Hex Shaft Coupler'],
+
+// Argos stock data for tag search
+export const ArgosStock = [
+  {
+    name: 'Box 1',
+    src: '/argos1756-docs/img/Stock/Box_1.png',
     tagInventory: {
       'hex bearing': 10,
       'Shaft Collar': 5,
@@ -23,16 +22,20 @@ export const stockImages = [
       'Hex Shaft Coupler': 3
     }
   },
-  { name: 'Box 2', src: '/argos1756-docs/img/Stock/Box_2.png', tags: ['Master Links','Chain tensioner','Master Link', 'Chain size','Half Links'],
+  {
+    name: 'Box 2',
+    src: '/argos1756-docs/img/Stock/Box_2.png',
     tagInventory: {
-      'Master Links': `unknown`,
+      'Master Links': 'unknown',
       'Chain tensioner': 4,
       'Master Link': 20,
       'Chain size': 2,
       'Half Links': 7
     }
   },
-  { name: 'Box 3', src: '/argos1756-docs/img/Stock/Box_3.png', tags: ['Tap','Hot Glue','Loctite','Lubricant'],
+  {
+    name: 'Box 3',
+    src: '/argos1756-docs/img/Stock/Box_3.png',
     tagInventory: {
       'Tap': 2,
       'Hot Glue': 3,
@@ -40,7 +43,9 @@ export const stockImages = [
       'Lubricant': 5
     }
   },
-  { name: 'Box 4', src: '/argos1756-docs/img/Stock/Box_4.png', tags: ['LimeLight', 'CAN encoder','Through Bore Hex encoder','IMU','Canivore'],
+  {
+    name: 'Box 4',
+    src: '/argos1756-docs/img/Stock/Box_4.png',
     tagInventory: {
       'LimeLight': 1,
       'CAN encoder': 2,
@@ -62,5 +67,28 @@ export const stockImages = [
       'un': null
     }
   },
-  // Add more images/tags here
+  {
+    name: 'Belts',
+    src: '/argos1756-docs/img/Stock/HTD_belts.jpg',
+    tagInventory: {
+      'belt': 'unknown',
+      '45T': 7,
+      '60T': 18,
+      '70T': 11,
+      '80T': 16,
+      '90T': 12,
+      '100T': 14,
+      '110T': 2,
+      '115T': 8,
+      '120T': 10,
+      '125T': 2,
+      '130T': 1,
+      '150T': 6,
+      '160T': 6,
+      '170T': 2,
+      '180T': 6,
+      '230T': 2,
+      '250T': 5
+    }
+  }
 ];

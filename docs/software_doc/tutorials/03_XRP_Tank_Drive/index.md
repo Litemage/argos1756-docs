@@ -76,7 +76,7 @@ While simple, it's important to keep the tasks at hand straight. I will walk you
 If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../../XRP_Docs/03_XRP_project/index.md) If you have, it's time to start coding!
 
 ### Create a Drivetrain Subsystem
-The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
+The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib_VS CodeDocs/03_Create_Subsystem_or_Command/index.md#creating-a-subsystem>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
 
 ###  Drivetrain.h header File
 

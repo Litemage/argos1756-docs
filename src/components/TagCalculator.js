@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { stockImages } from './ArgosStock';
+import { ArgosStock } from './ArgosStock';
 
 export default function TagCalculator() {
   // ...existing code...
@@ -7,8 +7,8 @@ export default function TagCalculator() {
   const [query, setQuery] = useState('');
   const [modalImg, setModalImg] = useState(null);
   const [smartInventory, setSmartInventory] = useState(true);
-  const results = stockImages.filter(img =>
-    img.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+  const results = ArgosStock.filter(img =>
+    Object.keys(img.tagInventory).some(tag => tag.toLowerCase().includes(query.toLowerCase()))
   );
   return (
     <div style={{margin: '2em 0', padding: '1em', border: '1px solid #ccc', borderRadius: '8px'}}>
@@ -60,7 +60,7 @@ export default function TagCalculator() {
         {results.length === 0 && query ? <div>No images found.</div> : null}
         {results.map(img => {
           // Find the first matching tag for the current query
-          const matchedTag = img.tags.find(tag => tag.toLowerCase().includes(query.toLowerCase()));
+          const matchedTag = Object.keys(img.tagInventory).find(tag => tag.toLowerCase().includes(query.toLowerCase()));
           let inventory = null;
           if (matchedTag && img.tagInventory) {
             inventory = img.tagInventory[matchedTag];
@@ -69,8 +69,8 @@ export default function TagCalculator() {
             <div key={img.src} style={{textAlign: 'center'}}>
               <img
                 src={img.src}
-                alt={img.tags.join(', ')}
-                style={{maxWidth: '150px', maxHeight: '150px', cursor: 'pointer'}}
+                alt={Object.keys(img.tagInventory).join(', ')}
+                style={{width: '150px', height: '150px', objectFit: 'cover', cursor: 'pointer', borderRadius: '8px', background: '#f8f8f8'}}
                 onClick={() => setModalImg(img)}
               />
               {query && matchedTag && (
@@ -105,7 +105,7 @@ export default function TagCalculator() {
           <div style={{textAlign: 'center'}}>
             <img
               src={modalImg.src}
-              alt={modalImg.tags.join(', ')}
+              alt={Object.keys(modalImg.tagInventory).join(', ')}
               style={{maxWidth: '80vw', maxHeight: '80vh', boxShadow: '0 0 20px #000'}}
             />
             {/* Show matched tag and inventory in modal if a tag is matched in the current search */}
@@ -142,8 +142,8 @@ export default function TagCalculator() {
             );
               };
               if (smartInventory && modalImg.tagInventory) {
-                if (query && modalImg.tags) {
-                  const matchedTag = modalImg.tags.find(tag => tag.toLowerCase().includes(query.toLowerCase()));
+                if (query) {
+                  const matchedTag = Object.keys(modalImg.tagInventory).find(tag => tag.toLowerCase().includes(query.toLowerCase()));
                   if (matchedTag) {
                     const inventory = modalImg.tagInventory[matchedTag];
                     return renderInventoryTable([[matchedTag, inventory]]);

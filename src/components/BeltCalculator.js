@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { WCP_HTD_9MM_BELT_SIZES, ARGOS_STOCKED_BELT_SIZES } from './ArgosStock';
+import { WCP_HTD_9MM_BELT_SIZES, ArgosStock } from './ArgosStock';
 
 export const BeltCalculator = () => {
   const [pitch, setPitch] = useState('5');
@@ -59,7 +59,17 @@ export const BeltCalculator = () => {
 
   const getBeltSizes = () => {
     if (beltSource === 'wcp') return WCP_HTD_9MM_BELT_SIZES;
-    if (beltSource === 'argos') return ARGOS_STOCKED_BELT_SIZES;
+    if (beltSource === 'argos') {
+      // Find the 'Belts' entry in ArgosStock and return its tagInventory keys (excluding 'belt' and any non-numeric keys)
+      const beltsEntry = ArgosStock.find(item => item.name === 'Belts');
+      if (beltsEntry && beltsEntry.tagInventory) {
+        return Object.keys(beltsEntry.tagInventory)
+          .filter(key => /^\d+T$/.test(key))
+          .map(key => parseInt(key))
+          .sort((a, b) => a - b);
+      }
+      return [];
+    }
     return null; // 'any' mode
   };
 
