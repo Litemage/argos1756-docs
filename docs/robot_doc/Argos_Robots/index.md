@@ -180,3 +180,13 @@ import Argos_2017_Robot from './Argos_2017.png'
 import TagCalculator from '@site/src/components/TagCalculator';
 
 <TagCalculator />
+
+## Interactive Code Reference (Preset Only)
+
+import InteractiveCodeReference from '@site/src/components/InteractiveCodeReference';
+
+<InteractiveCodeReference allowCustom={false} showDropdown={false} snippet="Hello World" />
+
+## Interactive Code Reference (With Custom Code)
+
+<InteractiveCodeReference allowCustom={true} />
