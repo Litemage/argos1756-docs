@@ -15,7 +15,7 @@ sidebar_position: 2
  #include <frc2/command/button/CommandXboxController.h>
  ```
 
- **Constructor**
+ **Member Variable Declarations**
 
  You need to create a `CommandXboxController` object, specifying the USB port it's connected to on the driver station (usually `0` for the primary controller).
 
@@ -87,7 +87,93 @@ sidebar_position: 2
  // Access the underlying frc::XboxController
  bool a_button_pressed = m_controller.GetHID().GetAButton();
  ```
-_____________________________________________________________________________________________________________________________________________________
+
+---
+
+## Subsystem
+
+A **Subsystem** is like a section of your robot that does a specific job. For example, you might have a drivetrain subsystem (for driving), an arm subsystem (for moving an arm), or an intake subsystem (for picking up game pieces). Each subsystem contains the code that controls its motors, sensors, and other hardware.
+
+**Why use subsystems?**
+- They help organize your code, so each part of the robot is managed in one place.
+- Only one command can control a subsystem at a time, so you don’t get conflicts.
+
+**How do you make a subsystem?**
+For a step-by-step guide on creating a subsystem, see [Creating a Subsystem](../03_Create_Subsystem_or_Command/index.md#creating-a-subsystem).
+
+```cpp
+#include <frc2/command/SubsystemBase.h>
+
+class DriveSubsystem : public frc2::SubsystemBase {
+ public:
+  DriveSubsystem() {
+    // Set up motors and sensors here
+  }
+  void Drive(double speed, double rotation) {
+    // Code to drive the robot
+  }
+};
+```
+
+For more details, see the [WPILib Subsystems documentation](https://docs.wpilib.org/en/stable/docs/software/commandbased/subsystems.html).
+
+---
+
+## Command
+
+A **Command** is a reusable piece of code that tells your robot to do something, like drive forward, move an arm, or wait for a sensor. Commands run when scheduled, until they are interrupted or their end condition is met
+
+#### Types of Commands
+
+WPILib provides several types of commands:
+
+- **InstantCommand**: Runs code once and then finishes.
+- **RunCommand**: Runs code repeatedly until interrupted or finished.
+- **WaitCommand**: Waits for a set amount of time.
+- **ScheduleCommand**: Schedules another command.
+- **Subsystem Command**: Controls a subsystem (like driving or shooting).
+- **Command Groups**: Combine multiple commands to run in sequence or in parallel.
+
+#### Command Lifecycle Methods
+
+Every command can override these methods:
+- `Initialize()`: Runs once when the command is scheduled.
+- `Execute()`: Runs repeatedly while the command is active.
+- `End(bool interrupted)`: Runs once when the command ends or is interrupted.
+- `IsFinished()`: Returns true when the command should end.
+
+#### Creating a Simple Command
+
+Here’s a simple command that drives the robot forward while it is scheduled:
+
+```cpp
+#include <frc2/command/CommandHelper.h>
+#include <frc2/command/CommandBase.h>
+
+class DriveForwardCommand : public frc2::CommandHelper<frc2::CommandBase, DriveForwardCommand> {
+ public:
+  explicit DriveForwardCommand(DriveSubsystem* drive) : m_drive(drive) {
+    AddRequirements({m_drive});
+  }
+  void Execute() override {
+    m_drive->Drive(0.5, 0.0); // Drive forward at half speed
+  }
+  void End(bool interrupted) override {
+    m_drive->Drive(0.0, 0.0); // Stop the robot
+  }
+  bool IsFinished() override {
+    return false; // Run until interrupted
+  }
+ private:
+  DriveSubsystem* m_drive;
+};
+```
+
+#### More Information
+
+For more details and advanced usage, see the [WPILib Commands documentation](https://docs.wpilib.org/en/stable/docs/software/commandbased/commands.html).
+
+---
 
 ## Unit Library
 

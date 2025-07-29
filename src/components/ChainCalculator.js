@@ -90,10 +90,10 @@ export const ChainCalculator = () => {
     // Ensure shorter chain is positive
     const finalShorterLinks = shorterLinks > 0 ? shorterLinks : exactLinks;
     
-    // Calculate actual center distances for each chain option
-    const shorterCenter = calculateCenterDistance(s1, s2, finalShorterLinks, pitch);
-    const exactCenter = calculateCenterDistance(s1, s2, exactLinks, pitch);
-    const longerCenter = calculateCenterDistance(s1, s2, longerLinks, pitch);
+    // Calculate actual center distances for each chain option, add tension
+    const shorterCenter = calculateCenterDistance(s1, s2, finalShorterLinks, pitch) + tension;
+    const exactCenter = calculateCenterDistance(s1, s2, exactLinks, pitch) + tension;
+    const longerCenter = calculateCenterDistance(s1, s2, longerLinks, pitch) + tension;
 
     // Calculate ratio
     const ratio = s2 / s1;

@@ -2,13 +2,14 @@
 sidebar_position: 2
 ---
 
+
 # C++ Quick Reference
 
 ## File Types: .h and .cpp Files
 
 In C++, code is typically organized into two types of files:
 
-### Header Files (.h)
+### What are Header Files (.h)
 Header files contain **declarations** - they tell the compiler what functions, classes, and variables exist, but not how they work.
 
 Think of a header file like a **table of contents** or **menu** at a restaurant - it lists what's available but doesn't contain the full recipe or instructions.
@@ -56,7 +57,7 @@ class Drivetrain : public frc2::SubsystemBase {
 };
 ```
 
-### Source Files (.cpp)
+### What are Source Files (.cpp)
 Source files contain **definitions** - they contain the actual code that does the work.
 
 Think of a source file like the **full recipe** with step-by-step instructions, or like the actual kitchen where the cooking happens.
@@ -71,6 +72,7 @@ Think of a source file like the **full recipe** with step-by-step instructions, 
 - **The detailed code for class methods** - How each function in a class actually works
 - **The main program logic** - The code that gets executed when you run your program
 - **Include statements** - Bringing in the header files so you can use what's declared there
+
 
 **Example - Drivetrain.cpp:**
 ```cpp
@@ -91,11 +93,61 @@ void Drivetrain::TankDrive(double leftSpeed, double rightSpeed) {
 void Drivetrain::Periodic() {}
 ```
 
+---
+
 ### Simple Rule of Thumb:
 - **.h file:** "What can this code do?" (the interface/promise)
   - Like a job description - it tells you what skills someone has
 - **.cpp file:** "How does this code actually work?" (the implementation/actual work)
   - Like watching someone actually do the job
+
+---
+
+## Include Statements (`#include`)
+
+In C++, `#include` statements are used to bring in code from other files or libraries. This allows you to use functions, classes, and variables that are defined elsewhere.
+
+**Why use `#include`?**
+- To use code from the C++ Standard Library (like `#include <iostream>` for input/output)
+- To use your own code from other files (like `#include "Drivetrain.h"`)
+- To use code from external libraries (like WPILib for FRC)
+
+**Syntax**
+```cpp
+#include <filename>   // For standard or external libraries
+#include "filename"   // For your own files in the project
+```
+
+**Tip:**
+- Use angle brackets `< >` for system or library headers.
+- Use double quotes `" "` for your own project files.
+
+---
+
+
+## Member Variable Declarations
+
+Member variables (also called fields or member objects) are variables that are declared inside a class. They represent the data or components that each object (instance) of the class will have.
+
+**Why use member variables?**
+- To store information or state for each object
+- To represent hardware components (like motors or controllers) in robot code
+- To keep related data and functions together in a class
+
+**Example:**
+```cpp
+class RobotContainer {
+ public:
+  RobotContainer();
+ private:
+  Drivetrain m_drivetrain; // Subsystem member variable
+  frc::XboxController m_controller{0}; // Input device member variable
+};
+```
+
+**Tip:**
+- The `m_` prefix is a common convention to indicate a member variable.
+- Member variables can be objects (like `Drivetrain` or `frc::XboxController`) or basic types (like `int`).
 
 ---
 
@@ -290,27 +342,33 @@ In this example, the program checks the value of `day`. If `day` is `3`, it prin
 
 ---
 
+
 ## Functions
 
 Functions are reusable blocks of code that perform a specific task.
 
-**Syntax:**
-```cpp
-returnType functionName(parameters) {
-    // Code
-    return value; // Optional
-}
-```
+In C++, functions are usually **declared** in a header (`.h`) file and **defined** in a source (`.cpp`) file.
+
+- **Declaration:** Tells the compiler that a function exists and what its signature is (name, return type, parameters), but not what it does.  
+
+- **Definition:** Provides the actual code (body) for the function.  
 
 **Example:**
-```cpp
-int add(int a, int b) {
-    return a + b;
-}
 
-int result = add(3, 4); // result = 7
+*Drivetrain.h (Declaration):*
+```cpp
+// Declaration (in header file)
+void TankDrive(double leftSpeed, double rightSpeed);
 ```
 
+*Drivetrain.cpp (Definition):*
+```cpp
+// Definition (in source file)
+void Drivetrain::TankDrive(double leftSpeed, double rightSpeed) {
+    m_left_motor.Set(leftSpeed);
+    m_right_motor.Set(-rightSpeed);
+}
+```
 ---
 
 ## Input and Output

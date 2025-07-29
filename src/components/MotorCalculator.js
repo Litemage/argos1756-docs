@@ -5,12 +5,13 @@ export const MotorCalculator = () => {
   const [motorType, setMotorType] = useState('krakenx60');
   const [motorCount, setMotorCount] = useState('1');
   const [inputMode, setInputMode] = useState('ratio'); // 'ratio' or 'gears'
-  const [outputMode, setOutputMode] = useState('basic'); // 'basic', 'wheel', or 'arm'
+  const [outputMode, setOutputMode] = useState('basic'); // 'basic', 'wheel', 'arm', or 'elevator'
+  const [spoolDiameter, setSpoolDiameter] = useState('1.5'); // inches, for elevator
+  const [elevatorLoad, setElevatorLoad] = useState('0'); // pounds, for elevator
   const [gearRatio, setGearRatio] = useState('1');
   const [wheelDiameter, setWheelDiameter] = useState('4'); // inches
   const [armLength, setArmLength] = useState('24'); // inches
   const [armLoad, setArmLoad] = useState('0'); // pounds
-  const [gearboxEfficiency, setGearboxEfficiency] = useState('65'); // percentage
   const [gearStages, setGearStages] = useState([
     { drivingTeeth: '16', drivenTeeth: '16' }
   ]);
@@ -70,7 +71,7 @@ export const MotorCalculator = () => {
     }
 
     const numMotors = parseInt(motorCount) || 1;
-    const efficiency = parseFloat(gearboxEfficiency) / 100 || 0.65; // Convert percentage to decimal
+    const efficiency = 0.8; // Hardcoded to 80%
 
     // Calculate geared performance with efficiency
     const gearedFreeSpeed = motor.freeSpeed / ratio; // RPM (same regardless of motor count, efficiency doesn't affect free speed significantly)
@@ -100,6 +101,7 @@ export const MotorCalculator = () => {
     // Calculate wheel surface speed if in wheel mode
     let wheelSurfaceSpeed = null;
     let robotSpeed = null;
+    let stallDragLoad = null;
     if (outputMode === 'wheel') {
       const wheelDiam = parseFloat(wheelDiameter);
       if (!isNaN(wheelDiam) && wheelDiam > 0) {
@@ -111,6 +113,32 @@ export const MotorCalculator = () => {
         wheelSurfaceSpeed = surfaceSpeedInMin / 12 / 60; // ft/s
         // Robot speed assuming no slippage
         robotSpeed = wheelSurfaceSpeed;
+        // Stall Drag Load (lbs) = torque (in-lbs) / (wheel radius in inches)
+        stallDragLoad = torqueInLbs / (wheelDiam / 2);
+      }
+    }
+
+    // Calculate elevator linear speed if in elevator mode
+    let elevatorSpeed = null;
+    let elevatorMaxLoad = null;
+    let elevatorCurrentPerMotor = null;
+    if (outputMode === 'elevator') {
+      const spoolDiam = parseFloat(spoolDiameter);
+      const load = parseFloat(elevatorLoad) || 0;
+      if (!isNaN(spoolDiam) && spoolDiam > 0) {
+        // Spool circumference in inches
+        const spoolCircumference = Math.PI * spoolDiam;
+        // Linear speed in inches per minute
+        const linearSpeedInMin = gearedFreeSpeed * spoolCircumference;
+        // Convert to inches per second
+        elevatorSpeed = linearSpeedInMin / 60;
+        // Max load (in pounds) = torque (in-lbs) / (spool radius in inches)
+        elevatorMaxLoad = torqueInLbs / (spoolDiam / 2);
+        // Current draw per motor under load (linear estimate)
+        if (elevatorMaxLoad && elevatorMaxLoad > 0 && load > 0) {
+          const loadRatio = Math.min(load / elevatorMaxLoad, 1);
+          elevatorCurrentPerMotor = motor.freeCurrent + (motor.stallCurrent - motor.freeCurrent) * loadRatio;
+        }
       }
     }
 
@@ -158,7 +186,6 @@ export const MotorCalculator = () => {
       motor: motor,
       motorCount: numMotors,
       gearRatio: ratio,
-      efficiency: efficiency,
       gearedFreeSpeed: gearedFreeSpeed,
       gearedMaxTorque: gearedMaxTorque,
       gearedMaxTorqueInLbs: torqueInLbs,
@@ -166,6 +193,12 @@ export const MotorCalculator = () => {
       wheelDiameter: parseFloat(wheelDiameter) || 0,
       wheelSurfaceSpeed: wheelSurfaceSpeed,
       robotSpeed: robotSpeed,
+      stallDragLoad: stallDragLoad,
+      spoolDiameter: parseFloat(spoolDiameter) || 0,
+      elevatorSpeed: elevatorSpeed,
+      elevatorMaxLoad: elevatorMaxLoad,
+      elevatorLoad: parseFloat(elevatorLoad) || 0,
+      elevatorCurrentPerMotor: elevatorCurrentPerMotor,
       armLength: parseFloat(armLength) || 0,
       armLoad: parseFloat(armLoad) || 0,
       armRotationSpeed: armRotationSpeed,
@@ -183,7 +216,7 @@ export const MotorCalculator = () => {
   // Auto-calculate whenever inputs change
   useEffect(() => {
     calculateMotorPerformance();
-  }, [motorType, motorCount, gearRatio, inputMode, gearStages, outputMode, wheelDiameter, armLength, armLoad, gearboxEfficiency]);
+  }, [motorType, motorCount, gearRatio, inputMode, gearStages, outputMode, wheelDiameter, armLength, armLoad, elevatorLoad, spoolDiameter]);
 
   return (
     <div style={{
@@ -199,81 +232,62 @@ export const MotorCalculator = () => {
       {/* Step 1: Select Motor Type */}
       <div style={{marginBottom: '20px'}}>
         <h5 style={{color: 'var(--ifm-color-content)', marginBottom: '10px'}}>Step 1: Select Motor</h5>
-        
-        <div style={{marginBottom: '15px'}}>
-          <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', color: 'var(--ifm-color-content)'}}>
-            Motor Type:
-          </label>
-          <select 
-            value={motorType}
-            onChange={(e) => setMotorType(e.target.value)}
-            style={{
-              width: '350px', 
-              padding: '8px', 
-              borderRadius: '4px', 
-              border: '1px solid var(--ifm-color-emphasis-300)',
-              backgroundColor: 'var(--ifm-background-color)',
-              color: 'var(--ifm-color-content)'
-            }}
-          >
-            {getMotorDropdownOptions().map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div style={{marginBottom: '15px'}}>
-          <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', color: 'var(--ifm-color-content)'}}>
-            Number of Motors:
-          </label>
-          <input 
-            type="number" 
-            value={motorCount}
-            onChange={(e) => setMotorCount(e.target.value)}
-            min="1"
-            max="10"
-            placeholder="1"
-            style={{
-              width: '100px', 
-              padding: '8px', 
-              borderRadius: '4px', 
-              border: '1px solid var(--ifm-color-emphasis-300)',
-              backgroundColor: 'var(--ifm-background-color)',
-              color: 'var(--ifm-color-content)'
-            }}
-          />
-          <div style={{fontSize: '11px', color: 'var(--ifm-color-emphasis-600)', marginTop: '2px'}}>
-            Multiple motors add torque and current
+        <div style={{display: 'flex', gap: '32px', alignItems: 'center', marginBottom: '10px'}}>
+          <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+            <label style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', minWidth: '90px', marginBottom: 0}} htmlFor="motor-type-select">
+              Motor Type:
+            </label>
+            <select 
+              id="motor-type-select"
+              value={motorType}
+              onChange={(e) => setMotorType(e.target.value)}
+              style={{
+                width: '200px',
+                height: '36px',
+                padding: '6px 8px',
+                borderRadius: '4px',
+                border: '1px solid var(--ifm-color-emphasis-300)',
+                backgroundColor: 'var(--ifm-background-color)',
+                color: 'var(--ifm-color-content)',
+                fontSize: '15px'
+              }}
+            >
+              {getMotorDropdownOptions().map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+            <label style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', minWidth: '120px', marginBottom: 0}} htmlFor="motor-count-input">
+              Number of Motors:
+            </label>
+            <input 
+              id="motor-count-input"
+              type="number" 
+              value={motorCount}
+              onChange={(e) => setMotorCount(e.target.value)}
+              min="1"
+              max="10"
+              placeholder="1"
+              style={{
+                width: '70px',
+                height: '36px',
+                padding: '6px 8px',
+                borderRadius: '4px',
+                border: '1px solid var(--ifm-color-emphasis-300)',
+                backgroundColor: 'var(--ifm-background-color)',
+                color: 'var(--ifm-color-content)',
+                fontSize: '15px'
+              }}
+            />
           </div>
         </div>
-
-        <div style={{marginBottom: '15px'}}>
-          <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', color: 'var(--ifm-color-content)'}}>
-            Gearbox Efficiency (%):
-          </label>
-          <input 
-            type="number" 
-            value={gearboxEfficiency}
-            onChange={(e) => setGearboxEfficiency(e.target.value)}
-            min="1"
-            max="100"
-            step="1"
-            placeholder="65"
-            style={{
-              width: '100px', 
-              padding: '8px', 
-              borderRadius: '4px', 
-              border: '1px solid var(--ifm-color-emphasis-300)',
-              backgroundColor: 'var(--ifm-background-color)',
-              color: 'var(--ifm-color-content)'
-            }}
-          />
-          <div style={{fontSize: '11px', color: 'var(--ifm-color-emphasis-600)', marginTop: '2px'}}>
-            Typical: 65-85% (single stage), 50-70% (multi-stage)
-          </div>
+        <div style={{fontSize: '11px', color: 'var(--ifm-color-emphasis-600)', marginBottom: '10px', marginLeft: '2px'}}>
+          Multiple motors add torque and current
         </div>
+        {/* Gearbox Efficiency input removed, efficiency is now hardcoded in logic */}
       </div>
 
       {/* Step 2: Input Gear Ratio */}
@@ -285,27 +299,40 @@ export const MotorCalculator = () => {
           <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', color: 'var(--ifm-color-content)'}}>
             Input Method:
           </label>
-          <div style={{display: 'flex', gap: '10px'}}>
-            <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-              <input 
-                type="radio" 
-                value="ratio" 
-                checked={inputMode === 'ratio'}
-                onChange={(e) => setInputMode(e.target.value)}
-                style={{marginRight: '5px'}}
-              />
-              Ratio
-            </label>
-            <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-              <input 
-                type="radio" 
-                value="gears" 
+          <div style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '5px'}}>
+            <span style={{fontWeight: inputMode === 'ratio' ? 'bold' : 'normal', color: inputMode === 'ratio' ? 'var(--ifm-color-primary)' : 'var(--ifm-color-content)'}}>Ratio</span>
+            <label style={{position: 'relative', display: 'inline-block', width: '48px', height: '24px', margin: 0}}>
+              <input
+                type="checkbox"
                 checked={inputMode === 'gears'}
-                onChange={(e) => setInputMode(e.target.value)}
-                style={{marginRight: '5px'}}
+                onChange={() => setInputMode(inputMode === 'ratio' ? 'gears' : 'ratio')}
+                style={{opacity: 0, width: 0, height: 0}}
               />
-              Gear Sizes
+              <span style={{
+                position: 'absolute',
+                cursor: 'pointer',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: inputMode === 'gears' ? 'var(--ifm-color-primary)' : 'var(--ifm-color-emphasis-200)',
+                borderRadius: '24px',
+                transition: 'background-color 0.2s',
+                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.08)'
+              }}>
+                <span style={{
+                  position: 'absolute',
+                  left: inputMode === 'gears' ? '26px' : '4px',
+                  top: '4px',
+                  width: '16px',
+                  height: '16px',
+                  background: 'white',
+                  borderRadius: '50%',
+                  transition: 'left 0.2s'
+                }} />
+              </span>
             </label>
+            <span style={{fontWeight: inputMode === 'gears' ? 'bold' : 'normal', color: inputMode === 'gears' ? 'var(--ifm-color-primary)' : 'var(--ifm-color-content)'}}>Gear Sizes</span>
           </div>
         </div>
 
@@ -459,44 +486,86 @@ export const MotorCalculator = () => {
       {/* Step 3: Output Mode */}
       <div style={{marginBottom: '20px'}}>
         <h5 style={{color: 'var(--ifm-color-content)', marginBottom: '10px'}}>Step 3: Output Type</h5>
-        
         <div style={{marginBottom: '15px'}}>
           <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', color: 'var(--ifm-color-content)'}}>
             Output Mode:
           </label>
-          <div style={{display: 'flex', gap: '10px', marginBottom: '15px'}}>
-            <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-              <input 
-                type="radio" 
-                value="basic" 
-                checked={outputMode === 'basic'}
-                onChange={(e) => setOutputMode(e.target.value)}
-                style={{marginRight: '5px'}}
-              />
-              Basic Performance
-            </label>
-            <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-              <input 
-                type="radio" 
-                value="wheel" 
-                checked={outputMode === 'wheel'}
-                onChange={(e) => setOutputMode(e.target.value)}
-                style={{marginRight: '5px'}}
-              />
-              Wheel Surface Speed
-            </label>
-            <label style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
-              <input 
-                type="radio" 
-                value="arm" 
-                checked={outputMode === 'arm'}
-                onChange={(e) => setOutputMode(e.target.value)}
-                style={{marginRight: '5px'}}
-              />
-              Arm Performance
-            </label>
-          </div>
+          <select
+            value={outputMode}
+            onChange={e => setOutputMode(e.target.value)}
+            style={{
+              width: '220px',
+              height: '36px',
+              padding: '6px 8px',
+              borderRadius: '4px',
+              border: '1px solid var(--ifm-color-emphasis-300)',
+              backgroundColor: 'var(--ifm-background-color)',
+              color: 'var(--ifm-color-content)',
+              fontSize: '15px',
+              marginBottom: '15px'
+            }}
+          >
+            <option value="basic">Basic Performance</option>
+            <option value="wheel">Wheel Surface Speed</option>
+            <option value="arm">Arm Performance</option>
+            <option value="elevator">Elevator (Linear)</option>
+          </select>
         </div>
+
+        {outputMode === 'elevator' && (
+          <div>
+            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '15px'}}>
+              <div>
+                <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', color: 'var(--ifm-color-content)'}}>
+                  Spool Diameter (inches) or Pitch Diameter:
+                </label>
+                <input 
+                  type="number" 
+                  value={spoolDiameter}
+                  onChange={(e) => setSpoolDiameter(e.target.value)}
+                  step="0.01"
+                  min="0.1"
+                  placeholder="1.5"
+                  style={{
+                    width: '100%', 
+                    padding: '8px', 
+                    borderRadius: '4px', 
+                    border: '1px solid var(--ifm-color-emphasis-300)',
+                    backgroundColor: 'var(--ifm-background-color)',
+                    color: 'var(--ifm-color-content)'
+                  }}
+                />
+                <div style={{fontSize: '11px', color: 'var(--ifm-color-emphasis-600)', marginTop: '2px'}}>
+                  Diameter of the elevator winch/spool
+                </div>
+              </div>
+              <div>
+                <label style={{display: 'block', marginBottom: '5px', fontWeight: 'bold', color: 'var(--ifm-color-content)'}}>
+                  Elevator Load (pounds):
+                </label>
+                <input 
+                  type="number" 
+                  value={elevatorLoad}
+                  onChange={(e) => setElevatorLoad(e.target.value)}
+                  step="0.1"
+                  min="0"
+                  placeholder="0"
+                  style={{
+                    width: '100%', 
+                    padding: '8px', 
+                    borderRadius: '4px', 
+                    border: '1px solid var(--ifm-color-emphasis-300)',
+                    backgroundColor: 'var(--ifm-background-color)',
+                    color: 'var(--ifm-color-content)'
+                  }}
+                />
+                <div style={{fontSize: '11px', color: 'var(--ifm-color-emphasis-600)', marginTop: '2px'}}>
+                  Weight being lifted by the elevator
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {outputMode === 'wheel' && (
           <div>
@@ -606,8 +675,46 @@ export const MotorCalculator = () => {
               </div>
             </div>
 
-            <div style={{display: 'grid', gridTemplateColumns: outputMode === 'basic' ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr', gap: '20px', textAlign: 'center'}}>
-              {outputMode === 'arm' ? (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns:
+                outputMode === 'basic' ? '1fr 1fr 1fr' :
+                outputMode === 'elevator' ? '1fr 1fr' :
+                '1fr 1fr 1fr', // changed from 4 to 3 for wheel
+              gap: '20px',
+              textAlign: 'center'
+            }}>
+              {outputMode === 'elevator' ? (
+                <>
+                  <div>
+                    <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Linear Speed</div>
+                    <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>
+                      {results.elevatorSpeed !== null ? results.elevatorSpeed.toFixed(2) : '—'} in/sec
+                    </div>
+                    <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
+                      Based on spool diameter and gear ratio
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Max Lift Load</div>
+                    <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>
+                      {results.elevatorMaxLoad !== null ? results.elevatorMaxLoad.toFixed(1) : '—'} lbs
+                    </div>
+                    <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
+                      At stall torque, {results.spoolDiameter}" spool
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Current Draw per Motor</div>
+                    <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>
+                      {results.elevatorCurrentPerMotor !== null ? results.elevatorCurrentPerMotor.toFixed(1) : '—'} A
+                    </div>
+                    <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
+                      At entered elevator load
+                    </div>
+                  </div>
+                </>
+              ) : outputMode === 'arm' ? (
                 <>
                   <div>
                     <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Stall Load</div>
@@ -621,6 +728,31 @@ export const MotorCalculator = () => {
                     <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>{results.loadedCurrentPerMotor ? results.loadedCurrentPerMotor.toFixed(1) : '—'} A</div>
                     <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
                       At entered arm load
+                    </div>
+                  </div>
+                </>
+              ) : outputMode === 'wheel' ? (
+                <>
+                  {/* Max Torque output removed as requested */}
+                  <div>
+                    <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Stall Drag Load</div>
+                    <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>
+                      {results.stallDragLoad !== null && results.stallDragLoad !== undefined ? results.stallDragLoad.toFixed(1) : '—'} lbs
+                    </div>
+                    <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
+                      Max pushing force at stall (ignores friction)
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Robot Speed</div>
+                    <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>
+                      {results.robotSpeed !== null && results.robotSpeed !== undefined ? results.robotSpeed.toFixed(1) : '—'} ft/s
+                    </div>
+                    <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
+                      {results.robotSpeed !== null && results.robotSpeed !== undefined ? (results.robotSpeed * 0.681818).toFixed(1) : '—'} mph
+                    </div>
+                    <div style={{fontSize: '11px', color: 'var(--ifm-color-emphasis-600)', marginTop: '2px'}}>
+                      {results.wheelDiameter !== null && results.wheelDiameter !== undefined ? results.wheelDiameter : '—'}" wheel
                     </div>
                   </div>
                 </>
@@ -648,16 +780,17 @@ export const MotorCalculator = () => {
               
 
               {outputMode === 'wheel' && results.wheelSurfaceSpeed !== null && (
-                <div>
-                  <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Robot Speed</div>
-                  <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>{results.robotSpeed.toFixed(1)} ft/s</div>
-                  <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
-                    {(results.robotSpeed * 0.681818).toFixed(1)} mph
+                  <div>
+                    <div style={{fontWeight: 'bold', color: 'var(--ifm-color-content)', marginBottom: '5px'}}>Current Draw per Motor</div>
+                    <div style={{fontSize: '18px', fontWeight: 'bold', color: 'var(--ifm-color-primary)'}}>
+                      {results.motor && results.motor.freeCurrent !== undefined && results.motor.stallCurrent !== undefined
+                        ? `${results.motor.freeCurrent.toFixed(1)} - ${results.motor.stallCurrent.toFixed(1)} A`
+                        : '—'}
+                    </div>
+                    <div style={{fontSize: '12px', color: 'var(--ifm-color-emphasis-600)'}}>
+                      Free to stall (per motor)
+                    </div>
                   </div>
-                  <div style={{fontSize: '11px', color: 'var(--ifm-color-emphasis-600)', marginTop: '2px'}}>
-                    {results.wheelDiameter}" wheel
-                  </div>
-                </div>
               )}
 
               {outputMode === 'arm' && results.armRotationSpeed !== null && (
