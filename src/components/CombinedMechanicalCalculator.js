@@ -3,7 +3,7 @@ import BeltCalculator from './BeltCalculator';
 import ChainCalculator from './ChainCalculator';
 import GearCalculator from './GearCalculator';
 import MotorCalculator from './MotorCalculator';
-import TagCalculator from './TagCalculator';
+import ArgosInventorySearch from './ArgosInventorySearch';
 
 
 const calculators = [

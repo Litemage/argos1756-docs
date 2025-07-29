@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { ArgosStock } from './ArgosStock';
 
-export default function TagCalculator() {
+export default function ArgosInventorySearch() {
   // ...existing code...
 
   const [query, setQuery] = useState('');
   const [modalImg, setModalImg] = useState(null);
-  const [smartInventory, setSmartInventory] = useState(true);
   const results = ArgosStock.filter(img =>
     Object.keys(img.tagInventory).some(tag => tag.toLowerCase().includes(query.toLowerCase()))
   );
@@ -21,40 +20,6 @@ export default function TagCalculator() {
           onChange={e => setQuery(e.target.value)}
           style={{padding: '0.5em', fontSize: '1em', width: '60%'}}
         />
-        <label style={{display: 'flex', alignItems: 'center', gap: '0.5em', fontWeight: 'bold', fontSize: '1em', cursor: 'pointer'}}>
-          <span>Smart Inventory</span>
-          <span style={{position: 'relative', display: 'inline-block', width: '48px', height: '24px'}}>
-            <input
-              type="checkbox"
-              checked={smartInventory}
-              onChange={() => setSmartInventory(v => !v)}
-              style={{opacity: 0, width: 0, height: 0}}
-            />
-            <span style={{
-              position: 'absolute',
-              cursor: 'pointer',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: smartInventory ? 'var(--ifm-color-primary)' : 'var(--ifm-color-emphasis-200)',
-              borderRadius: '24px',
-              transition: 'background-color 0.2s',
-              boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.08)'
-            }}>
-              <span style={{
-                position: 'absolute',
-                left: smartInventory ? '26px' : '4px',
-                top: '4px',
-                width: '16px',
-                height: '16px',
-                background: 'white',
-                borderRadius: '50%',
-                transition: 'left 0.2s'
-              }} />
-            </span>
-          </span>
-        </label>
       </div>
       <div style={{marginTop: '1em', display: 'flex', flexWrap: 'wrap', gap: '1em'}}>
         {results.length === 0 && query ? <div>No images found.</div> : null}
@@ -81,7 +46,7 @@ export default function TagCalculator() {
                   ) : ''}
                 </div>
               )}
-              <div style={{fontSize: '0.95em', color: 'var(--ifm-color-content)', fontWeight: 'bold'}}>{img.name}</div>
+              <div style={{fontSize: '0.95em', color: 'var(--ifm-color-content)', fontWeight: 'bold'}}>{img.Location_Name}</div>
             </div>
           );
         })}
@@ -141,21 +106,12 @@ export default function TagCalculator() {
                 );
               };
               if (modalImg && modalImg.tagInventory) {
-                if (smartInventory && query) {
-                  const matchedTag = Object.keys(modalImg.tagInventory).find(tag => tag.toLowerCase().includes(query.toLowerCase()));
-                  if (matchedTag) {
-                    return renderInventoryTable([[matchedTag, modalImg.tagInventory[matchedTag]]]);
-                  } else {
-                    // If no match, show nothing
-                    return <div style={{color:'#fff', fontSize:'1.2em', margin:'1em'}}>No matching inventory found for this tag.</div>;
-                  }
-                }
-                // Otherwise show all inventory
+                // Always show all inventory
                 return renderInventoryTable(Object.entries(modalImg.tagInventory));
               }
               return null;
             })()}
-            <div style={{fontSize: '4em', color: '#fff', marginTop: '0.5em', fontWeight: 'bold', textShadow: '2px 2px 8px #000'}}>{modalImg.name}</div>
+            <div style={{fontSize: '4em', color: '#fff', marginTop: '0.5em', fontWeight: 'bold', textShadow: '2px 2px 8px #000'}}>{modalImg.Location_Name}</div>
           </div>
         </div>
       )}

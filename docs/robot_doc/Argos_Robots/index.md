@@ -27,7 +27,7 @@ import Argos_2017_Robot from './Argos_2017.png'
 - **Match Archive**: [Team 1756](https://www.thebluealliance.com/team/1756/history)
 
 
-## 2025 - REEFSCAPEfdfda
+## 2025 - REEFSCAPE
 
 [Match Archive](https://www.thebluealliance.com/team/1756/2025) | [Game Animation](https://www.youtube.com/watch?v=YWbxcjlY9JY) | [CAD](https://a360.co/3BZzQtr) | [Handout](/files/2025_Judge_Handout.pdf)
 <img src={Argos_2025_Robot} width="400"/>
@@ -174,28 +174,3 @@ import Argos_2017_Robot from './Argos_2017.png'
 - **Midwest Regional** - Rookie All-Star Award, Regional Winner, Autodesk Visualization Award, Highest Rookie Seed Award
 - **Archimedes Division** - Competed at World Championships
 - **Einstein Field** - Autodesk Rising Star Visualization Award
-
-
-
-import TagCalculator from '@site/src/components/TagCalculator';
-
-<TagCalculator />
-
-## Interactive Code Reference (Preset Only)
-
-import InteractiveCodeReference from '@site/src/components/InteractiveCodeReference';
-
-
-<InteractiveCodeReference allowCustom={false} showDropdown={false}>
-{`
-// This is a custom C++ code example
-int main() {
-    return 0;
-#include 'stuff'
-}
-`}
-</InteractiveCodeReference>
-
-## Interactive Code Reference (With Custom Code)
-
-<InteractiveCodeReference allowCustom={true} showDropdown={true} />

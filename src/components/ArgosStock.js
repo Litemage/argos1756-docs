@@ -11,7 +11,7 @@ export const WCP_HTD_9MM_BELT_SIZES = [
 // Argos stock data for tag search
 export const ArgosStock = [
   {
-    name: 'Box 1',
+    Location_Name: 'Box 1',
     src: '/argos1756-docs/img/Stock/Box_1.png',
     tagInventory: {
       'hex bearing': 10,
@@ -23,7 +23,7 @@ export const ArgosStock = [
     }
   },
   {
-    name: 'Box 2',
+    Location_Name: 'Box 2',
     src: '/argos1756-docs/img/Stock/Box_2.png',
     tagInventory: {
       'Master Links': 'unknown',
@@ -34,7 +34,7 @@ export const ArgosStock = [
     }
   },
   {
-    name: 'Box 3',
+    Location_Name: 'Box 3',
     src: '/argos1756-docs/img/Stock/Box_3.png',
     tagInventory: {
       'Tap': 2,
@@ -44,7 +44,7 @@ export const ArgosStock = [
     }
   },
   {
-    name: 'Box 4',
+    Location_Name: 'Box 4',
     src: '/argos1756-docs/img/Stock/Box_4.png',
     tagInventory: {
       'LimeLight': 1,
@@ -68,7 +68,7 @@ export const ArgosStock = [
     }
   },
   {
-    name: 'Belts',
+    Location_Name: 'Belts',
     src: '/argos1756-docs/img/Stock/HTD_belts.jpg',
     tagInventory: {
       'belt': 'unknown',
