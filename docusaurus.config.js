@@ -141,6 +141,12 @@ const config = {
             position: 'left',
             label: 'Robot',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'SponsorshipSidebar',
+            position: 'left',
+            label: 'Sponsorship',
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/Litemage/argos1756-docs',
