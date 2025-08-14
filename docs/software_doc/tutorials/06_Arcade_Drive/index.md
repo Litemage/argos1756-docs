@@ -58,30 +58,30 @@ flowchart TD
 ## Time to Start Coding
 
 ### Creating a project
-If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../../XRP_Docs/03_XRP_project/index.md) If you have, it's time to start coding!
+If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../../XRP Docs/03_XRP_project/index.md) If you have, it's time to start coding!
 
 ### Create a Drivetrain Subsystem
 
-The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib_VS CodeDocs/03_Create_Subsystem_or_Command/index.md#creating-a-subsystem>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
+The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib VSCode Docs/03_Create_Subsystem_or_Command/index.md#creating-a-subsystem>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
 
 
 ### Drivetrain.h Header File
 
-For more information on what header (.h) files are, see [What are Header files](../../CPP_Docs/CPP_software_quick_reference/index.md#what-are-header-files-h).
+For more information on what header (.h) files are, see [What are Header files](../../CPP Docs/CPP_software_quick_reference/index.md#what-are-header-files-h).
 
 Navigate to your `Drivetrain.h` file. Here are the steps you need to follow:
 
 1. **Include the XRP Motor header.**  
    Add the necessary include statement at the top of your file so you can use the XRP motor objects.  
-   If you need help, see the [XRP Motor Quick Reference](<../../XRP_Docs/02_XRP Software Quick Reference/index.md#xrp-motor>).
+   If you need help, see the [XRP Motor Quick Reference](<../../XRP Docs/02_XRP Software Quick Reference/index.md#xrp-motor>).
 
 2. **Add the motor objects.**  
    Create objects for the left and right motors.  
-   For more details, refer to the [XRP Motor Quick Reference](<../../XRP_Docs/02_XRP Software Quick Reference/index.md#xrp-motor>).
+   For more details, refer to the [XRP Motor Quick Reference](<../../XRP Docs/02_XRP Software Quick Reference/index.md#xrp-motor>).
 
 3. **Add the ArcadeDrive function declaration.**  
    In the `public` section of your class, declare the ArcadeDrive function.  
-   If you need help with C++ functions, check the [C++ function Quick Reference](../../CPP_Docs/CPP_software_quick_reference/index.md#functions).
+   If you need help with C++ functions, check the [C++ function Quick Reference](../../CPP Docs/CPP_software_quick_reference/index.md#functions).
 
 <details>
 <summary>Your Drivetrain.h file should look like this.</summary>
@@ -120,12 +120,12 @@ class Drivetrain : public frc2::SubsystemBase {
 
 ### Drivetrain.cpp Source File
 
-For more information on what source file (.cpp) files are, see [What are source files](../../CPP_Docs/CPP_software_quick_reference/index.md#what-are-source-files-cpp).
+For more information on what source file (.cpp) files are, see [What are source files](../../CPP Docs/CPP_software_quick_reference/index.md#what-are-source-files-cpp).
 
 Navigate to your `Drivetrain.cpp` file. Here are the steps you need to follow:
 
 1. **ArcadeDrive function definition**
-  We will add the `ArcadeDrive` function definition. If you need help with C++ functions, check the [C++ function Quick Reference](../../CPP_Docs/CPP_software_quick_reference/index.md#functions).
+  We will add the `ArcadeDrive` function definition. If you need help with C++ functions, check the [C++ function Quick Reference](../../CPP Docs/CPP_software_quick_reference/index.md#functions).
 
 2. **Adding function body**
   We will now add the function body.  This is where we will do the math to get the left and right motor speeds
@@ -168,21 +168,21 @@ void Drivetrain::ArcadeDrive(double speed, double turning){
 
 ### RobotContainer.h Header File
 
-The `RobotContainer.h` file is where you set up your robot's main structure, including subsystems and input devices. For more information on header files, see [What are Header files](../../CPP_Docs/CPP_software_quick_reference/index.md#what-are-header-files-h).
+The `RobotContainer.h` file is where you set up your robot's main structure, including subsystems and input devices. For more information on header files, see [What are Header files](../../CPP Docs/CPP_software_quick_reference/index.md#what-are-header-files-h).
 
 Navigate to your `RobotContainer.h` file. Here’s what you need to do:
 
 1. **Include the Drivetrain Subsystem Header**  
-   Add an `#include` statement for your `Drivetrain.h` file so you can use your drivetrain subsystem. If you need help with adding includes see [Include Statements (#include)](../../CPP_Docs/CPP_software_quick_reference/index.md#include-statements-include)
+   Add an `#include` statement for your `Drivetrain.h` file so you can use your drivetrain subsystem. If you need help with adding includes see [Include Statements (#include)](../../CPP Docs/CPP_software_quick_reference/index.md#include-statements-include)
 
 2. **Declare the Drivetrain Subsystem**  
-   Add a member variable for your `Drivetrain` subsystem.  If you need help see [member veriable declarations](../../CPP_Docs/CPP_software_quick_reference/index.md#member-variable-declarations)
+   Add a member variable for your `Drivetrain` subsystem.  If you need help see [member veriable declarations](../../CPP Docs/CPP_software_quick_reference/index.md#member-variable-declarations)
 
 3. **Include your xbox controller**  
-   Add an include for your xbox controller.   If you need help see [Xbox Controller](<../../WPILib_VS CodeDocs/02_WPILib Software Quick Reference/index.md#xbox-controller>)
+   Add an include for your xbox controller.   If you need help see [Xbox Controller](<../../WPILib VSCode Docs/02_WPILib Software Quick Reference/index.md#xbox-controller>)
 
 4. **Declare the xbox controller.**  
-    Add an xbox controller. If you need help see [Xbox Controller](<../../WPILib_VS CodeDocs/02_WPILib Software Quick Reference/index.md#xbox-controller>)
+    Add an xbox controller. If you need help see [Xbox Controller](<../../WPILib VSCode Docs/02_WPILib Software Quick Reference/index.md#xbox-controller>)
 
 <details>
 <summary>Your RobotContainer.h file should look like this:</summary>

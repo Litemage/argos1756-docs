@@ -57,7 +57,7 @@ When you run the simulation, a window called the **"Robot Simulation"** will app
 
 :::note
 
-When testing XRP code, you must enable the robot using the [FRC Driver Station](<../../FRC_Software_Tools/Driver Station/index.md>) and select a robot state (e.g., Teleoperated) for your code to run.
+When testing XRP code, you must enable the robot using the [FRC Driver Station](<../../FRC Software Tools/Driver Station/index.md>) and select a robot state (e.g., Teleoperated) for your code to run.
 
 :::
 

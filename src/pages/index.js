@@ -16,11 +16,14 @@ import Robot2023 from '@site/docs/robot_doc/Argos_Robots/Argos_2023.png';
 import Robot2024 from '@site/docs/robot_doc/Argos_Robots/Argos_2024.jpeg';
 import Robot2025 from '@site/docs/robot_doc/Argos_Robots/Argos_2025.jpeg';
 
+import ArgosLogo from '@site/static/img/favicon.png';
+
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
+        <img src={ArgosLogo} width={300} alt="Argos Logo" className={styles.logo} />
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
@@ -33,26 +36,24 @@ function HomepageHeader() {
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   const robots = [
-  {year: 2014, game: 'AERIAL ASSIST', img: Robot2014},
-  {year: 2016, game: 'FIRST STRONGHOLD', img: Robot2016},
-    {year: 2018, game: 'FIRST POWER UP', img: Robot2018},
-    {year: 2019, game: 'DESTINATION: DEEP SPACE', img: Robot2019},
-    {year: 2020, game: 'INFINITE RECHARGE', img: Robot2020},
-    // 2021 had no in-person robot; intentionally omitted
-    {year: 2022, game: 'RAPID REACT', img: Robot2022},
-    {year: 2023, game: 'CHARGED UP', img: Robot2023},
-    {year: 2024, game: 'CRESCENDO', img: Robot2024},
     {year: 2025, game: 'REEFSCAPE', img: Robot2025},
+    {year: 2024, game: 'CRESCENDO', img: Robot2024},
+    {year: 2023, game: 'CHARGED UP', img: Robot2023},
+    {year: 2022, game: 'RAPID REACT', img: Robot2022},
+    // 2021 had no in-person robot; intentionally omitted
+    {year: 2020, game: 'INFINITE RECHARGE', img: Robot2020},
+    {year: 2019, game: 'DESTINATION: DEEP SPACE', img: Robot2019},
+    {year: 2018, game: 'FIRST POWER UP', img: Robot2018},
+    {year: 2016, game: 'FIRST STRONGHOLD', img: Robot2016},
+    {year: 2014, game: 'AERIAL ASSIST', img: Robot2014},
   ];
-  robots.sort((a,b) => a.year - b.year);
+  robots.sort((a,b) => b.year - a.year);
   return (
     <Layout
       title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main>
-
-
         <section className={styles.timelineSection}>
           <div className={styles.timeline}>
             <div className={styles.timelineList}>
@@ -60,6 +61,9 @@ export default function Home() {
                 <div key={year} className={styles.timelineItem} title={`${year} - ${game}`}>
                   <div className={styles.imageWrap}>
                     <img src={img} alt={`Argos Robot ${year} - ${game}`} className={styles.timelineImage} loading="lazy" />
+                  </div>
+                  <div className={styles.robotImgText}>
+                    <p>{game} - {year}</p>
                   </div>
                 </div>
               ))}

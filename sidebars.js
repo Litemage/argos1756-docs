@@ -32,7 +32,7 @@ const sidebars = {
   //     items: [
   //       'tutorials/XRP_Arcade_Drive/arcade-drive',
   //       'tutorials/XRP_Tank_Drive/tutorial_XRP_tank_drive',
-  //       'tutorials/WPILib_VS CodeDocs/tutorial_XRP_WPILib',
+  //       'tutorials/WPILib VSCode Docs/tutorial_XRP_WPILib',
   //       'tutorials/XRP_Run_Code/tutorial_XRP_run_code',
   //       'tutorials/XRP_project/tutorial_XRP_Project'
   //     ],

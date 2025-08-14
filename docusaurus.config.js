@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Argos 1756',
+  title: 'Argos - FIRST Robotics Team 1756',
   favicon: 'img/favicon.png',
   markdown : {
     mermaid: true
