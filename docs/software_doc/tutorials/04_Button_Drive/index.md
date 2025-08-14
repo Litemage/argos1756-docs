@@ -28,7 +28,7 @@ Let's start with listing out the tasks we need to perform:
 * Turn right when the **B** button is pressed.
 
 ### Flow Chart:
-Now lets make a [Flow Chart](../../CPP_Docs/CPP_software_quick_reference/index.md#flow-charts).   Try this on your own before looking at the flow chart
+Now lets make a [Flow Chart](../../CPP Docs/CPP_software_quick_reference/index.md#flow-charts).   Try this on your own before looking at the flow chart
 <details>
 <summary>Flow Chart 📊</summary>
 
@@ -55,7 +55,7 @@ flowchart TD
 </details>
 
 ### Inputs and Outputs
-Now that we understand how the code will work we need to define the input and output of our function. It is important to also define the [data types](../../CPP_Docs/CPP_software_quick_reference/index.md#variables-and-data-types) for these inputs and outputs.
+Now that we understand how the code will work we need to define the input and output of our function. It is important to also define the [data types](../../CPP Docs/CPP_software_quick_reference/index.md#variables-and-data-types) for these inputs and outputs.
 
 <details>
 <summary>Define Inputs and Outputs.  Try defining the Inputs and Outputs before looking.</summary>
@@ -77,17 +77,17 @@ Now that we understand how the code will work we need to define the input and ou
 ## Time to Start Coding
 
 ### Creating a project
-If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../../XRP_Docs/03_XRP_project/index.md) If you have, it's time to start coding!
+If you haven't already created an XRP project, you'll need to do that now. See [How to Create an XRP Project](../../XRP Docs/03_XRP_project/index.md) If you have, it's time to start coding!
 
 ### Create a Drivetrain Subsystem
 
-The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib_VS CodeDocs/03_Create_Subsystem/index.md>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
+The first step is to create a subsystem for our drivetrain. See [How to Create a Subsystem](<../../WPILib VSCode Docs/03_Create_Subsystem_or_Command/index.md#creating-a-subsystem>) for instructions on how to do this. You should name your subsystem `Drivetrain`.
 
 ### Drivetrain.h Header File
 
 Just as a reminder, the header (`.h`) file is like a table of contents for our code. It declares the functions that are available, but the actual instructions for those functions are written in the source (`.cpp`) file. We are about to add a new function declaration to our `Drivetrain.h`.  
 
-1. We need to tell the software we want to use the XRP robot motors. To do this we will need to include the header that declares the motor objects, see [Controlling a Motor](../WPILib_VS CodeDocs/tutorial_XRP_WPILib.md#controlling-a-motor) for more details on controlling XRP robot motor.
+1. We need to tell the software we want to use the XRP robot motors. To do this we will need to include the header that declares the motor objects, see [Controlling a Motor](../WPILib VSCode Docs/tutorial_XRP_WPILib.md#controlling-a-motor) for more details on controlling XRP robot motor.
     1. We will need to add the following include to the top of the `Drivetrain.h` file
     ```cpp
     #include <frc/xrp/XRPMotor.h>
@@ -171,7 +171,7 @@ Now that we've declared our function in the header file, it's time to define wha
 
    }
    ```
-  Next, we will add the code to the `ButtonDrive` function. This function will use an `if-else if-else` statement to determine the robot's movement based on the button inputs. If you're unfamiliar with `if-else` statements, refer to the [if-else statements guide](../../CPP_Docs/CPP_software_quick_reference/index.md#if-else-statements) for more details.  We will be writing our code in between the `{}` in `Drivetrain::ButtonDrive`
+  Next, we will add the code to the `ButtonDrive` function. This function will use an `if-else if-else` statement to determine the robot's movement based on the button inputs. If you're unfamiliar with `if-else` statements, refer to the [if-else statements guide](../../CPP Docs/CPP_software_quick_reference/index.md#if-else-statements) for more details.  We will be writing our code in between the `{}` in `Drivetrain::ButtonDrive`
 
   Here is the implementation:
 
@@ -259,7 +259,7 @@ We will now need to open `RobotContainer.h`
      #include <frc/XboxController.h>
      #include <frc2/command/RunCommand.h>
      ```
-2.  Next, we need to create the actual `Drivetrain` and `XboxController` objects inside our `RobotContainer`. Think of this as giving the brain its own set of legs and ears to use. We'll declare these in the `private` section to keep our code organized. For more details on the controller, see the [Xbox Controller section in the WPILib tutorial](<../../WPILib_VS CodeDocs/02_WPILib Software Quick Reference/index.md#xbox-controller>)
+2.  Next, we need to create the actual `Drivetrain` and `XboxController` objects inside our `RobotContainer`. Think of this as giving the brain its own set of legs and ears to use. We'll declare these in the `private` section to keep our code organized. For more details on the controller, see the [Xbox Controller section in the WPILib tutorial](<../../WPILib VSCode Docs/02_WPILib Software Quick Reference/index.md#xbox-controller>)
 
      ```cpp
      private:
@@ -412,7 +412,7 @@ frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
 
 
 ## Time to test your code
-Great job writing your first XRP code.  it is time to test your code. Go to [XRP Run Code](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>) to test your code
+Great job writing your first XRP code.  it is time to test your code. Go to [XRP Run Code](<../../WPILib VSCode Docs/04_Simulate Robot Code/index.md>) to test your code
 
 If everything is working correctly, you can now drive your XRP robot using the buttons
 

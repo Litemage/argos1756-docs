@@ -24,7 +24,7 @@ The solution is to use **variables** organized inside a **namespace**.
 ## What are Variables and Namespaces?
 
 ### Variables
-A [**variable**](../../CPP_Docs/CPP_software_quick_reference/index.md#variables-and-data-types) is a named placeholder for a value. When you create a variable, you must also give it a **data type**, which tells the computer what kind of information it will hold. For example:
+A [**variable**](../../CPP Docs/CPP_software_quick_reference/index.md#variables-and-data-types) is a named placeholder for a value. When you create a variable, you must also give it a **data type**, which tells the computer what kind of information it will hold. For example:
 -   `double`: For numbers with decimals (like motor speeds `0.5`, `-0.75`).
 -   `int`: For whole numbers (1, 2, 43).
 -   `bool`: For true/false values.
@@ -36,7 +36,7 @@ We can use this in 'Drivetrain.cpp' instead of writing `1` everywhere, we can cr
 -   **Tuning:** If the robot turns too fast, you only need to change the value of `TurnSpeed` in **one place** to update it everywhere it's used.
 
 ### Namespaces
-A [**namespace**](../../CPP_Docs/CPP_software_quick_reference/index.md#namespaces) is a way to group related variables and functions under a common name. This helps organize your code and avoid naming conflicts. For example, we can create a `DrivetrainConstants` namespace to hold all the variables related to our drivetrain, like `MoveSpeed` and `TurnSpeed`.
+A [**namespace**](../../CPP Docs/CPP_software_quick_reference/index.md#namespaces) is a way to group related variables and functions under a common name. This helps organize your code and avoid naming conflicts. For example, we can create a `DrivetrainConstants` namespace to hold all the variables related to our drivetrain, like `MoveSpeed` and `TurnSpeed`.
 
 Using a namespace ensures that these variables are logically grouped and easy to find, while also preventing them from accidentally conflicting with variables in other parts of the program.
 
@@ -174,7 +174,7 @@ else {
 </details>
 
 ## Time to Tune!
- it is time to test your code.  Go to [XRP Run Code](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>) to test your code.
+ it is time to test your code.  Go to [XRP Run Code](<../../WPILib VSCode Docs/04_Simulate Robot Code/index.md>) to test your code.
 
 Now that you've replaced the magic numbers with constants, it's time to test and tune your robot.
 

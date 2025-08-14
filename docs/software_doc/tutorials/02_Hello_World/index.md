@@ -26,7 +26,7 @@ Let's get started!
 ## Creating a project
 The first step in writing our "Hello, World!" program is to create a new project. This project will contain all the necessary files and configurations for our application.
 
-For detailed instructions on how to create a new project, please follow the guide for [creating an XRP project](../../XRP_Docs/03_XRP_project/index.md).
+For detailed instructions on how to create a new project, please follow the guide for [creating an XRP project](../../XRP Docs/03_XRP_project/index.md).
 
 Once your project is created, return to this tutorial to write your first lines of C++ code.
 
@@ -99,7 +99,7 @@ std::cout << "Hello, World!\n";
 ## Running your code
 Now that you've written and saved your code, the next step is to run it and see your message appear!
 
-For detailed instructions, on how to run your code please follow the guide on [how to simulate your robot code](<../../WPILib_VS CodeDocs/04_Simulate Robot Code/index.md>)
+For detailed instructions, on how to run your code please follow the guide on [how to simulate your robot code](<../../WPILib VSCode Docs/04_Simulate Robot Code/index.md>)
 
 ---
 

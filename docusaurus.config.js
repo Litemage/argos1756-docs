@@ -10,8 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Argos Documentation',
-  tagline: 'FRC Team 1756',
+  title: 'Argos - FIRST Robotics Team 1756',
   favicon: 'img/favicon.png',
   markdown : {
     mermaid: true
@@ -107,12 +106,18 @@ const config = {
       },
       // Replace with your project's social card
       navbar: {
-        title: 'Argos Documentation',
+        title: 'Argos 1756',
         logo: {
           alt: 'argos dog logo',
           src: 'img/favicon.png',
         },
         items: [
+          {
+            type: 'docSidebar',
+            sidebarId: 'AboutSidebar',
+            position: 'left',
+            label: 'About',
+          },
           {
             type: 'search',
             position: 'right',
@@ -141,6 +146,12 @@ const config = {
             position: 'left',
             label: 'Robot',
           },
+          {
+            type: 'docSidebar',
+            sidebarId: 'SponsorshipSidebar',
+            position: 'left',
+            label: 'Sponsorship',
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/Litemage/argos1756-docs',
@@ -153,11 +164,19 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'About',
             items: [
               {
-                label: 'About',
-                to: '/docs/about',
+                label: 'Argos 1756',
+                to: '/docs/about_doc/About/',
+              },
+              {
+                label: 'Contact',
+                to: '/docs/about_doc/contact/',
+              },
+              {
+                label: 'FIRST',
+                to: '/docs/about_doc/First/',
               },
             ],
           },

@@ -28,3 +28,12 @@
   --ifm-color-primary-lightest: #ffd94d;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* Sponsor logo contrast helper: adds a light backdrop only in dark mode */
+[data-theme='dark'] .on-dark-boost {
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 8px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
