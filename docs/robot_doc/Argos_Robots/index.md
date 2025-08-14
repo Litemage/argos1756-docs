@@ -9,7 +9,8 @@ import Argos_2020_Robot from './Argos_2020.jpeg'
 import Argos_2019_Robot from './Argos_2019.jpeg'
 import Argos_2018_Robot from './argos_2018.jpg'
 import Argos_2017_Robot from './Argos_2017.png'
-
+import Argos_2016_Robot from './2016_robot.jpg'
+import Argos_2014_Robot from './2014_robot.jpg'
 
 
 
@@ -100,7 +101,7 @@ import Argos_2017_Robot from './Argos_2017.png'
 ## 2016 - FIRST STRONGHOLD
 
 [Match Archive](https://www.thebluealliance.com/team/1756/2016) | [Game Animation](https://www.youtube.com/watch?v=VqOKzoHJDjA)
-
+<img src={Argos_2016_Robot} width="400"/>
 - **Central Illinois Regional** - Regional Finalists Wildcard
 - **Midwest Regional** - Industrial Design Award sponsored by General Motors
 - **Tesla Division** - Championship Subdivision Finalist
@@ -117,7 +118,7 @@ import Argos_2017_Robot from './Argos_2017.png'
 ## 2014 - AERIAL ASSIST
 
 [Match Archive](https://www.thebluealliance.com/team/1756/2014) | [Game Animation](https://www.youtube.com/watch?v=f5zWzICG5to)
-
+<img src={Argos_2014_Robot} width="400"/>
 - **Central Illinois Regional** - Industrial Design Award sponsored by General Motors
 - **Boilermaker Regional** - Regional Finalist, Imagery Award in honor of Jack Kamen
 - **Galileo Division** - Competed at World Championships
