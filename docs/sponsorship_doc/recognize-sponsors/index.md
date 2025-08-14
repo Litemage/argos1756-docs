@@ -65,7 +65,7 @@ If you'd like your logo listed, please contact us at 1756argos1756@limestone310.
 
 <!-- Sergison-->
 <p>
-	<a href="https://www.sergisonmachine.com" target="_blank" rel="noopener noreferrer">
+	<a href="https://www.sergisonmachine.net" target="_blank" rel="noopener noreferrer">
 		<img src={SergisonMachineLogo} alt="Sergison Machine" width="300" />
 	</a>
 	</p>
