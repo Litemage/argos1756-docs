@@ -108,7 +108,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      description="Argos - FIRST Robotics Team 1756 Official Website">
       <HomepageHeader />
       <div className={styles.belowHeroTitle}>
   <Heading as="h1" className={styles.belowHeroTitleText}>Argos - FIRST Robotics Team 1756</Heading>
