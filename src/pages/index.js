@@ -3,6 +3,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
+import Link from '@docusaurus/Link';
 
 // Import robot images directly from the docs folder using the @site alias
 // Note: We only include years we have images for in this repo.
@@ -35,6 +36,16 @@ function HomepageHeader() {
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
+  // Generate the same anchor IDs Docusaurus produces for headings like "YYYY - GAME"
+  const anchorId = (year, game) => {
+    const text = `${year} - ${game}`;
+    return text
+      .toLowerCase()
+      // remove characters that are not alphanumeric, space, or hyphen
+      .replace(/[^a-z0-9 \-]/g, '')
+      // collapse whitespace to single hyphens
+      .replace(/\s+/g, '-');
+  };
   const robots = [
     {year: 2025, game: 'REEFSCAPE', img: Robot2025},
     {year: 2024, game: 'CRESCENDO', img: Robot2024},
@@ -59,9 +70,15 @@ export default function Home() {
             <div className={styles.timelineList}>
               {robots.map(({year, game, img}) => (
                 <div key={year} className={styles.timelineItem} title={`${year} - ${game}`}>
-                  <div className={styles.imageWrap}>
-                    <img src={img} alt={`Argos Robot ${year} - ${game}`} className={styles.timelineImage} loading="lazy" />
-                  </div>
+                  <Link
+                    to={`/docs/robot_doc/Argos_Robots/#${anchorId(year, game)}`}
+                    aria-label={`Go to ${year} - ${game} robot details`}
+                    title={`View ${year} ${game} robot`}
+                  >
+                    <div className={styles.imageWrap}>
+                      <img src={img} alt={`Argos Robot ${year} - ${game}`} className={styles.timelineImage} loading="lazy" />
+                    </div>
+                  </Link>
                   <div className={styles.robotImgText}>
                     <p>{game} - {year}</p>
                   </div>
