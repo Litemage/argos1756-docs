@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import React, {useEffect, useRef, useState} from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
@@ -21,15 +22,60 @@ import ArgosLogo from '@site/static/img/favicon.png';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
+  const headerRef = useRef(null);
+  const [videoSize, setVideoSize] = useState({width: 0, height: 0});
+  const [containerSize, setContainerSize] = useState({width: 0, height: 0});
+
+  // YouTube IDs for each Release Video referenced on the robots page
+  // 2024, 2020, 2019, 2015
+  const releaseVideoIds = ['_mAsaiEyiTg', 'ISnO6BCw4w4', 'pBY8D94sVfs', 'YMa69eiFIXc'];
+  const primaryId = releaseVideoIds[0];
+  const playlistParam = releaseVideoIds.join(',');
+  const videoSrc = `https://www.youtube.com/embed/${primaryId}?autoplay=1&mute=1&controls=0&playsinline=1&loop=1&playlist=${playlistParam}&modestbranding=1&rel=0&fs=0`;
+
+  useEffect(() => {
+    const updateSize = () => {
+      const el = headerRef.current;
+      if (!el) return;
+      const cw = el.clientWidth;
+      const ch = el.clientHeight;
+      if (!cw || !ch) return;
+  setContainerSize({width: cw, height: ch});
+      const videoAR = 16 / 9;
+      const containerAR = cw / ch;
+      if (containerAR > videoAR) {
+        // Fit by height
+        const height = ch;
+        const width = Math.round(height * videoAR);
+        setVideoSize({width, height});
+      } else {
+        // Fit by width
+        const width = cw;
+        const height = Math.round(width / videoAR);
+        setVideoSize({width, height});
+      }
+    };
+    updateSize();
+    const onResize = () => window.requestAnimationFrame(updateSize);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <img src={ArgosLogo} width={300} alt="Argos Logo" className={styles.logo} />
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+    <header ref={headerRef} className={clsx('hero hero--primary', styles.heroBanner)}>
+      {/* Background video (muted, autoplay, loop) */}
+      <div className={styles.videoBackground} aria-hidden="true">
+        <div className={styles.videoOverlay} />
+        <iframe
+          className={styles.videoIframe}
+          src={videoSrc}
+          title="Argos 2024 Release Video"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen={false}
+          tabIndex={-1}
+          style={{width: videoSize.width || undefined, height: videoSize.height || undefined}}
+        />
       </div>
+  {/* Side logos removed per request */}
     </header>
   );
 }
@@ -64,6 +110,9 @@ export default function Home() {
       title={`${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
+      <div className={styles.belowHeroTitle}>
+  <Heading as="h1" className={styles.belowHeroTitleText}>Argos - FIRST Robotics Team 1756</Heading>
+      </div>
       <main>
         <section className={styles.timelineSection}>
           <div className={styles.timeline}>
