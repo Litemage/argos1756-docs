@@ -38,7 +38,7 @@ import Argos_2014_Robot from './2014_robot.jpg'
 
 ## 2024 - CRESCENDO
 
-[Match Archive](https://www.thebluealliance.com/team/1756/2024) | [Game Animation](https://www.youtube.com/watch?v=9keeDyFxzY4) | [CAD](https://a360.co/3u6Vbgm) | [Release Vidoe](https://www.youtube.com/watch?v=_mAsaiEyiTg)  | [Handout](/files/2024_Judge_Handout _v2.pdf)
+[Match Archive](https://www.thebluealliance.com/team/1756/2024) | [Game Animation](https://www.youtube.com/watch?v=9keeDyFxzY4) | [CAD](https://a360.co/3u6Vbgm) | [Release Video](https://www.youtube.com/watch?v=_mAsaiEyiTg) | [Handout](/files/2024_Judge_Handout_v2.pdf)
 <img src={Argos_2024_Robot} width="400"/>
 - **St. Louis Regional** - Regional Winners, Innovation in Control Award
 - **Central Illinois Regional** - Regional Winners, Innovation in Control Award
