@@ -3,7 +3,7 @@ sidebar_position: 2
 ---
 import belt_dia from './Timing_Belt_Pulley_Pitch_Diameter_and_Outside_Diameter.jpg'
 
-# Pulley & Belt Overview
+# Belts and Pulleys
 ## Overview
 - **What they are:**
     - A belt is a strong loop (like a rubber band) that connects two or more pulleys (wheels with grooves).

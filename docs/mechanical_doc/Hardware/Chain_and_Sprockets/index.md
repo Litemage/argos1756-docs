@@ -5,7 +5,7 @@ import half_link from './half_link.png'
 import chain_tension from './chain_tension.png'
 import ChainCalculator from '@site/src/components/ChainCalculator'
 
-# Chain & Sprocket Overview
+# Chain & Sprocket
 
 ## Overview
 
@@ -67,7 +67,8 @@ Argos uses **#25 Roller Chain**
 
 ## How to Size Chain
 
-[How To: Chain Breakers](https://www.youtube.com/watch?v=WXpWhqeg2bo)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WXpWhqeg2bo" title="How To: Chain Breakers" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 ---
 ## Quick Reference 

@@ -8,12 +8,12 @@ Welcome to the Software section for Argos (FRC Team 1756). This area collects ou
 
 What you'll find here
 
-- **[C++ Basics & How-To](./cpp-basics)** — A compact, practical reference for common C++ tasks.
-- **[CTRE Phoenix](./ctre-phoenix)** — Short reference and examples for Cross the Road Electronics (CTRE) libraries.
-- **[FRC Software Tools](./frc-software-tools)** — Guides for FRC-specific tools such as the Driver Station.
-- **[Tutorials](./tutorials)** — Step-by-step tutorials to get started with robot programming in C++.
-- **[WPILib (VS Code)](./wpilib-vscode)** — Instructions to set up VS Code for WPILib development, run robot code, and use the simulator.
-- **[XRP](./xrp)** — Reference for using the XRP robot framework.
+- **C++ Basics & How-To** — A compact, practical reference for common C++ tasks.
+- **CTRE Phoenix** — Short reference and examples for Cross the Road Electronics (CTRE) libraries.
+- **FRC Software Tools** — Guides for FRC-specific tools such as the Driver Station.
+- **Tutorials** — Step-by-step tutorials to get started with robot programming in C++.
+- **WPILib (VS Code)** — Instructions to set up VS Code for WPILib development, run robot code, and use the simulator.
+- **XRP** — Reference for using the XRP robot framework.
 
 How to use this section
 

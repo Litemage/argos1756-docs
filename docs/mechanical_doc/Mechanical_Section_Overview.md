@@ -8,13 +8,11 @@ Welcome to the Mechanical section for Argos (FRC Team 1756). This area collects 
 
 What you'll find here
 
-- **Bearings** — Selection guidance, types, mounting practices, and recommended vendors.
-- **Belts Chains Gears** — Design considerations, common sprocket and pulley choices, and gearing trade-offs.
-- **Bolts and nuts** — Fastener sizing, thread-locking practices, and common shop standards.
+- **Hardware** — Physical components including bearings, belts/chains/gears, and fasteners with selection guides and best practices.
 - **Calculators** — Useful calculators (belt lengths, gear ratios, bearing life, bolt torque) we use during design.
 
 How to use this section
 
 - Start with the calculators when you need to verify design numbers quickly.
-- Use the bearings and fastener guides when designing mounting points or assemblies.
-- Refer to the Belts/Chains/Gears guide when selecting drivetrain or mechanism power transmission components.
+- Browse the Hardware section for component selection guides and assembly best practices.
+- Use the hardware guides when designing mounting points, power transmission, or assemblies.

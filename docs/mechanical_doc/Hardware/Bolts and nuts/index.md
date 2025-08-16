@@ -8,7 +8,7 @@ import nylock from './nylock.jpg'
 import Rivnuts from './Rivnuts.jpg'
 import Standard_nut from './Standard_nut.jpg'
 
-# Overview
+# Bolts and Nuts
 ## The Basics
 A solid understanding of fasteners like bolts and nuts is crucial for building robust and reliable robots. This guide provides a quick reference for the common types of bolts and nuts used in Argos, how to identify them, and when to use each one.
 

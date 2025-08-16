@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Gear Overview
+# Gears
 
 ## Overview
 - **What they are:**  
