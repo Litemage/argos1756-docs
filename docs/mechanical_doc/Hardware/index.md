@@ -17,3 +17,4 @@ How to use this section
 - Check the Bearings guide when designing rotating assemblies or selecting bearing types for specific applications.
 - Refer to Belts Chains Gears when designing power transmission systems for drivetrains or mechanisms.
 - Use the Bolts and nuts guide for proper fastener selection and assembly procedures.
+
